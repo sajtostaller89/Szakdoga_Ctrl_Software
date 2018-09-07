@@ -352,7 +352,7 @@ public:
   enum __attribute__((__packed__)) _Tag {_S_leaf, _S_concat, _S_substringfn, _S_function};
   // Apparently needed by VC++
   // The data fields of leaves are allocated with some
-  // extra space, to accomodate future growth and for basic
+  // extra space, to accommodate future growth and for basic
   // character types, to hold a trailing eos character.
   enum __attribute__((__packed__)) { _S_alloc_granularity = 8 };
 
