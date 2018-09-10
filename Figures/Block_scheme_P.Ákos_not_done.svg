@@ -254,9 +254,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="651.20077"
-     inkscape:cy="490.80391"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="569.11975"
+     inkscape:cy="503.03884"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -3159,7 +3159,7 @@
          id="tspan458"
          x="-81.902458"
          y="77.737679"
-         style="stroke-width:0.26458332"></tspan></text>
+         style="stroke-width:0.26458332" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -3217,7 +3217,7 @@
        sodipodi:argument="-18.583303"
        sodipodi:t0="0.84969902"
        d="m -46.17648,122.6233 c 0.285508,-2.04488 2.281773,-3.42896 4.295448,-3.13587 1.64648,0.23965 2.984901,1.52346 3.355696,3.13596"
-       transform="matrix(0.69319502,0,0,1.643714,-8.575913,-124.40916)" />
+       transform="matrix(0.69319502,0,0,1.643714,-5.2350439,-123.20645)" />
     <path
        sodipodi:type="spiral"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332"
@@ -3230,7 +3230,7 @@
        sodipodi:argument="-15.364914"
        sodipodi:t0="0.84969902"
        d="m -31.337431,122.85956 c -0.418208,1.91021 -2.403851,3.07212 -4.284052,2.64902 -1.537347,-0.34595 -2.707914,-1.65551 -2.940868,-3.20514"
-       transform="matrix(0.69319502,0,0,1.643714,-8.575913,-124.40916)" />
+       transform="matrix(0.69319502,0,0,1.643714,-5.2350439,-123.20645)" />
     <path
        sodipodi:type="spiral"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332"
@@ -3243,7 +3243,7 @@
        sodipodi:argument="-18.583303"
        sodipodi:t0="0.84969902"
        d="m -31.396072,123.11789 c 0.285509,-2.04488 2.281774,-3.42896 4.295448,-3.13587 1.646481,0.23965 2.984902,1.52346 3.355696,3.13596"
-       transform="matrix(0.69319502,0,0,1.643714,-8.575913,-124.40916)" />
+       transform="matrix(0.69319502,0,0,1.643714,-5.2350439,-123.20645)" />
     <path
        sodipodi:type="spiral"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332"
@@ -3256,18 +3256,18 @@
        sodipodi:argument="-15.364914"
        sodipodi:t0="0.84969902"
        d="m -16.557022,123.42097 c -0.418208,1.91021 -2.403852,3.07212 -4.284052,2.64902 -1.537348,-0.34595 -2.707915,-1.65551 -2.940869,-3.20514"
-       transform="matrix(0.69319502,0,0,1.643714,-8.575913,-124.40916)" />
+       transform="matrix(0.69319502,0,0,1.643714,-5.2350439,-123.20645)" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:6.61480093px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.82685012"
-       x="-27.565918"
-       y="68.491661"
+       x="-24.173332"
+       y="69.676041"
        id="text4295-9"
        transform="scale(0.98475626,1.0154797)"><tspan
          sodipodi:role="line"
          id="tspan4293-8"
-         x="-27.565918"
-         y="68.491661"
+         x="-24.173332"
+         y="69.676041"
          style="font-size:6.61480093px;stroke-width:0.82685012">Sine</tspan></text>
     <rect
        style="fill:#000000;fill-opacity:0;stroke:url(#pattern2415-0-5-1);stroke-width:0.61824936;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -3546,7 +3546,7 @@
        inkscape:transform-center-y="1.3449014"
        transform="matrix(0,1.9507605,-0.68577918,0,-35.271306,-79.192156)" />
     <g
-       transform="translate(-153.79125,12.405104)"
+       transform="translate(-153.65762,13.340547)"
        id="g2755-8">
       <rect
          y="125.80995"
@@ -3569,7 +3569,7 @@
     </g>
     <g
        id="g3042-3"
-       transform="translate(-242.58148,8.6665888)">
+       transform="translate(-242.58148,9.6020321)">
       <rect
          y="106.30733"
          x="170.61958"
@@ -3580,7 +3580,7 @@
     </g>
     <g
        id="g3048-6"
-       transform="matrix(0,0.15718007,-1.0291893,0,-31.048528,116.05325)">
+       transform="matrix(0,0.15718007,-1.0291893,0,-31.048528,116.98869)">
       <rect
          style="fill:#000000;fill-opacity:1;stroke:#000005;stroke-width:0.352;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect3044-9"
@@ -3611,21 +3611,21 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="-68.165184"
-       y="123.23222"
+       y="124.16766"
        id="text2726-0-07"><tspan
          sodipodi:role="line"
          id="tspan2724-5-2"
          x="-68.165184"
-         y="123.23222"
+         y="124.16766"
          style="stroke-width:0.26458332">Div</tspan></text>
     <text
        id="text2852-1-5-1"
-       y="133.65802"
+       y="134.19257"
        x="-75.009033"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="stroke-width:0.26458332"
-         y="133.65802"
+         y="134.19257"
          x="-75.009033"
          id="tspan2850-9-7-4"
          sodipodi:role="line"><tspan
@@ -3776,7 +3776,7 @@
          sodipodi:type="star" />
     </g>
     <g
-       transform="matrix(0,-0.17679384,0.71250843,0,-75.611457,175.40404)"
+       transform="matrix(0,-0.16833854,0.71334502,0,-75.636055,174.76972)"
        id="g2830-0-7"
        style="fill:#ff0000;fill-opacity:0.72864326">
       <rect
@@ -3880,5 +3880,12 @@
          x="-52.749138"
          y="157.3107"
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';fill:#ff0000;fill-opacity:0.72864326;stroke-width:0.26458332">trig</tspan></text>
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:#000005;stroke-width:0.07557357;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect2506-9"
+       width="2.0589168"
+       height="1.1714458"
+       x="-45.654148"
+       y="74.156631" />
   </g>
 </svg>
