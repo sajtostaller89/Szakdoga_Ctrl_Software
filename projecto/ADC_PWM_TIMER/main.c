@@ -157,12 +157,11 @@ void main(void)
 //
 // Step 2. Initalize GPIO:
 //
-    // ADCINA0, ADCINA1:
-    //GpioCtrlRegs.AIOMUX1.bit.rsvd1 = 0;     //There is no use of it, because by default its the same, but for other ADCs you need it
-    //GpioCtrlRegs.AIOMUX1.bit.rsvd2 = 0;
+    // ADCINA4 ->SOC0 ->GPIO4, ADCINA2 ->SOC1 ->GPIO2:
+    InitAdcAio();
 
     // For this case just init GPIO pins for ePWM1
-     InitEPwm1Gpio();
+    InitEPwm1Gpio();
 
 
 //

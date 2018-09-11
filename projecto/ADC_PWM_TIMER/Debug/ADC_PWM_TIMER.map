@@ -1,10 +1,10 @@
 ******************************************************************************
              TMS320C2000 Linker PC v18.1.2                     
 ******************************************************************************
->> Linked Tue Sep 11 20:13:17 2018
+>> Linked Tue Sep 11 21:00:58 2018
 
 OUTPUT FILE NAME:   <ADC_PWM_TIMER.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 000089a8
+ENTRY POINT SYMBOL: "_c_int00"  address: 000089aa
 
 
 MEMORY CONFIGURATION
@@ -14,7 +14,7 @@ MEMORY CONFIGURATION
 PAGE 0:
   BEGIN                 00000000   00000002  00000002  00000000  RWIX
   RAMM0                 00000050   000003b0  00000221  0000018f  RWIX
-  RAML0_L3              00008000   00002000  00000ae4  0000151c  RWIX
+  RAML0_L3              00008000   00002000  00000ae6  0000151a  RWIX
   FPUTABLES             003fd860   000006a0  00000000  000006a0  RWIX
   IQTABLES              003fdf00   00000b50  00000000  00000b50  RWIX
   IQTABLES2             003fea50   0000008c  00000000  0000008c  RWIX
@@ -102,24 +102,24 @@ codestart
                   00000266    00000005                       : _lock.c.obj (.cinit:__unlock)
                   0000026b    00000002     --HOLE-- [fill = 0]
 
-.text      0    00008000    00000ae4     
+.text      0    00008000    00000ae6     
                   00008000    0000039b     F2806x_DefaultIsr.obj (.text:retain)
                   0000839b    0000023a     F2806x_Adc.obj (.text)
                   000085d5    0000018c     F2806x_SysCtrl.obj (.text)
-                  00008761    00000105     main.obj (.text)
-                  00008866    000000d8     F2806x_EPwm.obj (.text)
-                  0000893e    0000006a     main.obj (.text:retain)
-                  000089a8    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
-                  000089fe    00000029                       : exit.c.obj (.text)
-                  00008a27    00000028     F2806x_PieCtrl.obj (.text)
-                  00008a4f    00000026     F2806x_PieVect.obj (.text)
-                  00008a75    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
-                  00008a99    0000001e                       : memcpy.c.obj (.text)
-                  00008ab7    00000019                       : args_main.c.obj (.text)
-                  00008ad0    00000009                       : _lock.c.obj (.text)
-                  00008ad9    00000008     F2806x_CodeStartBranch.obj (.text)
-                  00008ae1    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
-                  00008ae3    00000001                       : startup.c.obj (.text)
+                  00008761    00000107     main.obj (.text)
+                  00008868    000000d8     F2806x_EPwm.obj (.text)
+                  00008940    0000006a     main.obj (.text:retain)
+                  000089aa    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  00008a00    00000029                       : exit.c.obj (.text)
+                  00008a29    00000028     F2806x_PieCtrl.obj (.text)
+                  00008a51    00000026     F2806x_PieVect.obj (.text)
+                  00008a77    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
+                  00008a9b    0000001e                       : memcpy.c.obj (.text)
+                  00008ab9    00000019                       : args_main.c.obj (.text)
+                  00008ad2    00000009                       : _lock.c.obj (.text)
+                  00008adb    00000008     F2806x_CodeStartBranch.obj (.text)
+                  00008ae3    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+                  00008ae5    00000001                       : startup.c.obj (.text)
 
 .pinit     0    00000050    00000000     UNINITIALIZED
 
@@ -375,9 +375,9 @@ MODULE SUMMARY
        Module                          code   initialized data   uninitialized data
        ------                          ----   ----------------   ------------------
     .\
-       main.obj                        367    515                576               
+       main.obj                        369    515                576               
     +--+-------------------------------+------+------------------+--------------------+
-       Total:                          367    515                576               
+       Total:                          369    515                576               
                                                                                    
     .\Source\
        F2806x_GlobalVariableDefs.obj   0      0                  3550              
@@ -407,7 +407,7 @@ MODULE SUMMARY
                                                                                    
        Stack:                          0      0                  768               
     +--+-------------------------------+------+------------------+--------------------+
-       Grand Total:                    2794   795                4928              
+       Grand Total:                    2796   795                4928              
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -511,12 +511,12 @@ address     data page           name
 
 00007900     1e4 (00007900)     _I2caRegs
 
-0000a000     280 (0000a000)     _i
-0000a001     280 (0000a000)     _j
+0000a000     280 (0000a000)     _j
+0000a001     280 (0000a000)     _i
 0000a002     280 (0000a000)     _ConversionCount
-0000a003     280 (0000a000)     _Voltage2
-0000a00d     280 (0000a000)     _Voltage1
-0000a018     280 (0000a000)     _epwm3_info
+0000a004     280 (0000a000)     _epwm3_info
+0000a00e     280 (0000a000)     _Voltage2
+0000a018     280 (0000a000)     _Voltage1
 0000a022     280 (0000a000)     _epwm2_info
 0000a02c     280 (0000a000)     _epwm1_info
 
@@ -542,7 +542,7 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                            
 ----  -------   ----                            
 0     00008000  .text                           
-0     000089fe  C$$EXIT                         
+0     00008a00  C$$EXIT                         
 0     000080be  _ADCINT1_ISR                    
 0     000080c8  _ADCINT2_ISR                    
 0     000082d0  _ADCINT3_ISR                    
@@ -557,7 +557,7 @@ page  address   name
 0     000083e8  _AdcOffsetSelfCal               
 1     00007100  _AdcRegs                        
 1     00000b00  _AdcResult                      
-0     000087a8  _Adc_Config                     
+0     000087aa  _Adc_Config                     
 0     0000830c  _CLA1_INT1_ISR                  
 0     00008316  _CLA1_INT2_ISR                  
 0     00008320  _CLA1_INT3_ISR                  
@@ -636,7 +636,7 @@ page  address   name
 1     00006b40  _EQep2Regs                      
 1     00000d01  _EmuBMode                       
 1     00000d00  _EmuKey                         
-0     00008a46  _EnableInterrupts               
+0     00008a48  _EnableInterrupts               
 0     0000874b  _ExtOscSel                      
 1     00000a80  _FlashRegs                      
 1     00000d04  _Flash_CPUScaleFactor           
@@ -660,25 +660,25 @@ page  address   name
 0     0000800a  _INT14_ISR                      
 0     0000839b  _InitAdc                        
 0     000083c6  _InitAdcAio                     
-0     00008866  _InitEPwm                       
-0     000087e3  _InitEPwm1Example               
-0     00008878  _InitEPwm1Gpio                  
-0     0000888a  _InitEPwm2Gpio                  
-0     0000889c  _InitEPwm3Gpio                  
-0     000088b0  _InitEPwm4Gpio                  
-0     000088c4  _InitEPwm5Gpio                  
-0     000088d6  _InitEPwm6Gpio                  
-0     000088e8  _InitEPwm7Gpio                  
-0     000088fa  _InitEPwm8Gpio                  
-0     00008867  _InitEPwmGpio                   
-0     0000890c  _InitEPwmSyncGpio               
+0     00008868  _InitEPwm                       
+0     000087e5  _InitEPwm1Example               
+0     0000887a  _InitEPwm1Gpio                  
+0     0000888c  _InitEPwm2Gpio                  
+0     0000889e  _InitEPwm3Gpio                  
+0     000088b2  _InitEPwm4Gpio                  
+0     000088c6  _InitEPwm5Gpio                  
+0     000088d8  _InitEPwm6Gpio                  
+0     000088ea  _InitEPwm7Gpio                  
+0     000088fc  _InitEPwm8Gpio                  
+0     00008869  _InitEPwmGpio                   
+0     0000890e  _InitEPwmSyncGpio               
 0     00008684  _InitPeripheralClocks           
-0     00008a27  _InitPieCtrl                    
-0     00008a4f  _InitPieVectTable               
+0     00008a29  _InitPieCtrl                    
+0     00008a51  _InitPieVectTable               
 0     00008601  _InitPll                        
 0     00008656  _InitPll2                       
 0     000085d5  _InitSysCtrl                    
-0     0000891d  _InitTzGpio                     
+0     0000891f  _InitTzGpio                     
 0     0000870b  _IntOsc1Sel                     
 0     0000871b  _IntOsc2Sel                     
 0     00008370  _LUF_ISR                        
@@ -724,8 +724,8 @@ page  address   name
 0     0000808c  _USER8_ISR                      
 0     00008096  _USER9_ISR                      
 1     00004000  _Usb0Regs                       
-1     0000a00d  _Voltage1                       
-1     0000a003  _Voltage2                       
+1     0000a018  _Voltage1                       
+1     0000a00e  _Voltage2                       
 0     000080fa  _WAKEINT_ISR                    
 0     000080d2  _XINT1_ISR                      
 0     000080dc  _XINT2_ISR                      
@@ -743,38 +743,38 @@ abs   ffffffff  ___TI_prof_data_start
 abs   ffffffff  ___binit__                      
 abs   ffffffff  ___c_args__                     
 0     00000050  ___cinit__                      
-0     00008ae4  ___etext__                      
+0     00008ae6  ___etext__                      
 abs   ffffffff  ___pinit__                      
 0     00008000  ___text__                       
-0     00008ab7  __args_main                     
+0     00008ab9  __args_main                     
 1     0000a25e  __lock                          
-0     00008ad8  __nop                           
-0     00008ad4  __register_lock                 
-0     00008ad0  __register_unlock               
+0     00008ada  __nop                           
+0     00008ad6  __register_lock                 
+0     00008ad2  __register_unlock               
 1     00000400  __stack                         
-0     00008ae3  __system_post_cinit             
-0     00008ae1  __system_pre_init               
+0     00008ae5  __system_post_cinit             
+0     00008ae3  __system_pre_init               
 1     0000a260  __unlock                        
-0     000089fe  _abort                          
-0     00008975  _adc1_isr                       
-0     000089a8  _c_int00                        
-0     00008a75  _copy_in                        
+0     00008a00  _abort                          
+0     00008977  _adc1_isr                       
+0     000089aa  _c_int00                        
+0     00008a77  _copy_in                        
 1     0000a02c  _epwm1_info                     
-0     0000893e  _epwm1_isr                      
+0     00008940  _epwm1_isr                      
 1     0000a022  _epwm2_info                     
-1     0000a018  _epwm3_info                     
-0     00008a00  _exit                           
-1     0000a000  _i                              
-1     0000a001  _j                              
+1     0000a004  _epwm3_info                     
+0     00008a02  _exit                           
+1     0000a001  _i                              
+1     0000a000  _j                              
 0     00008761  _main                           
-0     00008a99  _memcpy                         
+0     00008a9b  _memcpy                         
 0     00008391  _rsvd_ISR                       
 1     0000a040  _sinelookup                     
-0     00008839  _update_compare                 
+0     0000883b  _update_compare                 
 abs   ffffffff  binit                           
 0     00000050  cinit                           
 0     00000000  code_start                      
-0     00008ae4  etext                           
+0     00008ae6  etext                           
 abs   ffffffff  pinit                           
 
 
@@ -897,40 +897,40 @@ page  address   name
 0     0000872f  _XtalOscSel                     
 0     0000874b  _ExtOscSel                      
 0     00008761  _main                           
-0     000087a8  _Adc_Config                     
-0     000087e3  _InitEPwm1Example               
-0     00008839  _update_compare                 
-0     00008866  _InitEPwm                       
-0     00008867  _InitEPwmGpio                   
-0     00008878  _InitEPwm1Gpio                  
-0     0000888a  _InitEPwm2Gpio                  
-0     0000889c  _InitEPwm3Gpio                  
-0     000088b0  _InitEPwm4Gpio                  
-0     000088c4  _InitEPwm5Gpio                  
-0     000088d6  _InitEPwm6Gpio                  
-0     000088e8  _InitEPwm7Gpio                  
-0     000088fa  _InitEPwm8Gpio                  
-0     0000890c  _InitEPwmSyncGpio               
-0     0000891d  _InitTzGpio                     
-0     0000893e  _epwm1_isr                      
-0     00008975  _adc1_isr                       
-0     000089a8  _c_int00                        
-0     000089fe  C$$EXIT                         
-0     000089fe  _abort                          
-0     00008a00  _exit                           
-0     00008a27  _InitPieCtrl                    
-0     00008a46  _EnableInterrupts               
-0     00008a4f  _InitPieVectTable               
-0     00008a75  _copy_in                        
-0     00008a99  _memcpy                         
-0     00008ab7  __args_main                     
-0     00008ad0  __register_unlock               
-0     00008ad4  __register_lock                 
-0     00008ad8  __nop                           
-0     00008ae1  __system_pre_init               
-0     00008ae3  __system_post_cinit             
-0     00008ae4  ___etext__                      
-0     00008ae4  etext                           
+0     000087aa  _Adc_Config                     
+0     000087e5  _InitEPwm1Example               
+0     0000883b  _update_compare                 
+0     00008868  _InitEPwm                       
+0     00008869  _InitEPwmGpio                   
+0     0000887a  _InitEPwm1Gpio                  
+0     0000888c  _InitEPwm2Gpio                  
+0     0000889e  _InitEPwm3Gpio                  
+0     000088b2  _InitEPwm4Gpio                  
+0     000088c6  _InitEPwm5Gpio                  
+0     000088d8  _InitEPwm6Gpio                  
+0     000088ea  _InitEPwm7Gpio                  
+0     000088fc  _InitEPwm8Gpio                  
+0     0000890e  _InitEPwmSyncGpio               
+0     0000891f  _InitTzGpio                     
+0     00008940  _epwm1_isr                      
+0     00008977  _adc1_isr                       
+0     000089aa  _c_int00                        
+0     00008a00  C$$EXIT                         
+0     00008a00  _abort                          
+0     00008a02  _exit                           
+0     00008a29  _InitPieCtrl                    
+0     00008a48  _EnableInterrupts               
+0     00008a51  _InitPieVectTable               
+0     00008a77  _copy_in                        
+0     00008a9b  _memcpy                         
+0     00008ab9  __args_main                     
+0     00008ad2  __register_unlock               
+0     00008ad6  __register_lock                 
+0     00008ada  __nop                           
+0     00008ae3  __system_pre_init               
+0     00008ae5  __system_post_cinit             
+0     00008ae6  ___etext__                      
+0     00008ae6  etext                           
 1     00000400  __stack                         
 1     00000700  __STACK_END                     
 1     00000880  _DevEmuRegs                     
@@ -988,12 +988,12 @@ page  address   name
 1     00007740  _SpibRegs                       
 1     00007750  _ScibRegs                       
 1     00007900  _I2caRegs                       
-1     0000a000  _i                              
-1     0000a001  _j                              
+1     0000a000  _j                              
+1     0000a001  _i                              
 1     0000a002  _ConversionCount                
-1     0000a003  _Voltage2                       
-1     0000a00d  _Voltage1                       
-1     0000a018  _epwm3_info                     
+1     0000a004  _epwm3_info                     
+1     0000a00e  _Voltage2                       
+1     0000a018  _Voltage1                       
 1     0000a022  _epwm2_info                     
 1     0000a02c  _epwm1_info                     
 1     0000a040  _sinelookup                     
