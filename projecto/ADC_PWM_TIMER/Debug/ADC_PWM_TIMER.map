@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v18.1.2                     
 ******************************************************************************
->> Linked Fri Sep  7 18:49:22 2018
+>> Linked Tue Sep 11 18:33:05 2018
 
 OUTPUT FILE NAME:   <ADC_PWM_TIMER.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 000086b1
@@ -391,7 +391,7 @@ MODULE SUMMARY
     +--+-------------------------------+------+------------------+--------------------+
        Total:                          1627   256                3574              
                                                                                    
-    G:\Programok\ti - Szakdoga\ccsv8\tools\compiler\ti-cgt-c2000_18.1.2.LTS\lib\rts2800_fpu32.lib
+    C:\ti\ccsv8\tools\compiler\ti-cgt-c2000_18.1.2.LTS\lib\rts2800_fpu32.lib
        boot28.asm.obj                  86     0                  0                 
        exit.c.obj                      41     14                 6                 
        cpy_tbl.c.obj                   36     0                  0                 
