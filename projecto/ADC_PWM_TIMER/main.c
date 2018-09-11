@@ -24,10 +24,11 @@ void InitEPwm1Example(void);
 void InitEPwm2Example(void);
 void InitEPwm3Example(void);
 
-__interrupt void adc_isr(void);
+__interrupt void adc1_isr(void);
 __interrupt void epwm1_isr(void);
 __interrupt void epwm2_isr(void);
 __interrupt void epwm3_isr(void);
+
 void update_compare(EPWM_INFO*);
 
 //
@@ -192,7 +193,7 @@ void main(void)
     // Interrupts that are used are re-mapped to
     // ISR functions found within this file.
     EALLOW;                                 // This is needed to write to EALLOW protected registers
-    //PieVectTable.ADCINT1 = &adc1_isr;       //First the ADC
+    PieVectTable.ADCINT1 = &adc1_isr;       //First the ADC
     PieVectTable.EPWM1_INT = &epwm1_isr;
     EDIS;                                   // This is needed to disable write to EALLOW protected registers
 
@@ -267,6 +268,7 @@ __interrupt void epwm1_isr(void)
     // Acknowledge this interrupt to receive more interrupts from group 3
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
 }
+
 __interrupt void adc1_isr(void)
 {
     Voltage1[ConversionCount] = AdcResult.ADCRESULT0;
@@ -366,7 +368,7 @@ InitEPwm1Example()
 
     // Set Compare values
     EPwm1Regs.CMPA.half.CMPA = sinelookup[0];       // Set compare A value used to be 1
-    EPwm1Regs.CMPB = sinelookup[512];               // Set Compare B value used to be 1
+    EPwm1Regs.CMPB = sinelookup[511];               // Set Compare B value used to be 1
 
 
     // Set actions
