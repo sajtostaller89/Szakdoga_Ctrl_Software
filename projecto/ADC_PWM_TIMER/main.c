@@ -302,8 +302,8 @@ void Adc_Config(){
     EALLOW;
     AdcRegs.ADCCTL2.bit.ADCNONOVERLAP = 1; // Enable non-overlap mode sample and conversion is not overlapped
 
-    //If needed simultaneous mode for resolver is set:
-    // AdcRegs.ADCSAMPLEMODE.bit.SIMULEN0 = 1;      //It makes SOC0 and SOC1 trigger on the first trigger
+    //If needed simultaneous mode for resolver or current measurement is set:
+    // AdcRegs.ADCSAMPLEMODE.bit.SIMULEN0 = 1;
 
 
     // ADCINT1 trips after AdcResults latch
@@ -316,13 +316,14 @@ void Adc_Config(){
     // setup EOC1 to trigger ADCINT1 to fire
     AdcRegs.INTSEL1N2.bit.INT1SEL   = 1;
 
+    //In simultaneous mode we only need: AdcRegs.ADCSOC0CTL.bit.CHSEL    = 2; // set SOC0 channel select to ADCINA2 and ADCINB2
     AdcRegs.ADCSOC0CTL.bit.CHSEL    = 4;  // set SOC0 channel select to ADCINA4
     AdcRegs.ADCSOC1CTL.bit.CHSEL    = 2;  // set SOC1 channel select to ADCINA2
 
 
     // set SOC0 start trigger on EPWM1A, due to round-robin SOC0 converts
     // first then SOC1
-    AdcRegs.ADCSOC0CTL.bit.TRIGSEL  = 5;
+    AdcRegs.ADCSOC0CTL.bit.TRIGSEL  = 5;    //This should be 0 if we use software interrupts only
 
 
     // set SOC1 start trigger on EPWM1A, due to round-robin SOC0 converts
