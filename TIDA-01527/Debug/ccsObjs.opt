@@ -1,0 +1,1 @@
+"./F2806x_CodeStartBranch.obj" "./F2806x_GlobalVariableDefs.obj" "./F2806x_usDelay.obj" "./hal.obj" "./main.obj" "./resolver.obj" "../f28069M_RAM.cmd" "../cmd/F2806x_Headers_nonBIOS.cmd" "../include/IQmath_fpu32.lib" -llibc.a 
