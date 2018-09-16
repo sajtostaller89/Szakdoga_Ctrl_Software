@@ -1,5 +1,6 @@
 #include "DSP28x_Project.h"     // Device Headerfile and Examples Include File
 #include "F2806x_EPwm_defines.h"
+
 //
 // Typedefs
 //
@@ -28,6 +29,11 @@ __interrupt void adc1_isr(void);
 __interrupt void epwm1_isr(void);
 __interrupt void epwm2_isr(void);
 __interrupt void epwm3_isr(void);
+
+//TIMER
+__interrupt void cpu_timer0_isr(void);
+__interrupt void cpu_timer1_isr(void);
+__interrupt void cpu_timer2_isr(void);
 
 void update_compare(EPWM_INFO*);
 
@@ -75,6 +81,7 @@ EPWM_INFO epwm3_info;
 // Main
 //
 
+//Lookup table for ePWM modulation 512 data points------------------------------------------------------
 int i;
 int j;
 int sinelookup[512] = {1500,1518,1537,1555,1574,1592,1610,1629,
@@ -141,7 +148,7 @@ int sinelookup[512] = {1500,1518,1537,1555,1574,1592,1610,1629,
                        1065,1082,1100,1118,1136,1153,1171,1189,
                        1207,1225,1244,1262,1280,1298,1316,1335,
                        1353,1371,1390,1408,1426,1445,1463,1482};
-
+//--------------------------------------------------------------------------------------------
 void main(void)
 {
 
@@ -192,8 +199,11 @@ void main(void)
     // Interrupts that are used are re-mapped to
     // ISR functions found within this file.
     EALLOW;                                 // This is needed to write to EALLOW protected registers
-    PieVectTable.ADCINT1 = &adc1_isr;       //First the ADC
-    PieVectTable.EPWM1_INT = &epwm1_isr;
+    PieVectTable.ADCINT1 = &adc1_isr;       //First the ADC1
+    PieVectTable.EPWM1_INT = &epwm1_isr;    //Second the ePWM1
+    PieVectTable.TINT0 = &cpu_timer0_isr;   //Third the cPU Timers
+    PieVectTable.TINT1 = &cpu_timer1_isr;
+    PieVectTable.TINT2 = &cpu_timer2_isr;
     EDIS;                                   // This is needed to disable write to EALLOW protected registers
 
 //
@@ -217,6 +227,27 @@ void main(void)
     SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      //Then enable the sync
     EDIS;
 
+    // Initialize the CPUTimers (by Mate 2018.09.16.)---------------------------------------------
+
+        //Debughoz:
+        //This example configures CPU Timer0, 1, and 2 and increments
+        //! a counter each time the timer asserts an interrupt.
+        //! \b Watch \b Variables \n
+        //! - CpuTimer0.InterruptCount
+        //! - CpuTimer1.InterruptCount
+        //! - CpuTimer2.InterruptCount
+        // Step 4. Initialize the Device Peripheral. This function can be
+        //         found in F2806x_CpuTimers.c
+        //
+        InitCpuTimers();   // For this example, only initialize the Cpu Timers
+
+        // Configure CPU-Timer 0, 1, and 2 to interrupt every second:
+        // 80MHz CPU Freq, 1 second Period (in uSeconds)
+        // Config CPU Timers
+        ConfigCpuTimer(&CpuTimer0, 80, 110); //Akosnak interrupt 0.11ms- nkent
+        ConfigCpuTimer(&CpuTimer1, 80, 200); //Benedeknek és nekem 0,2ms-enkent kell interrupt (5kHz jelado) egyik negyszog
+        ConfigCpuTimer(&CpuTimer2, 80, 200); //Benedeknek és nekem 0,2ms-enkent kell interrupt (5kHz jelado) masik negyszog
+//--------------------------------------------------------------------------------------------------
 //
 // Step 5. User specific code, enable interrupts
 //
@@ -230,6 +261,10 @@ void main(void)
     EINT;                               // Enable Global interrupt INTM
     ERTM;                               // Enable Global realtime interrupt DBGM
 
+    // Enable CPU INT12, INT13 and INT14 for CPU TIMERS
+    IER |= M_INT12; //Timer0
+    IER |= M_INT13; //Timer1
+    IER |= M_INT14; //Timer2
 
     // Enable ADC INTn in the PIE: Group 1 interrupt 1
     PieCtrlRegs.PIEIER1.bit.INTx1 = 1;
@@ -239,6 +274,9 @@ void main(void)
     PieCtrlRegs.PIEIER3.bit.INTx1 = 1;
     PieCtrlRegs.PIEIER3.bit.INTx2 = 1;
     PieCtrlRegs.PIEIER3.bit.INTx3 = 1;
+
+    // Enable TIMER TINT0 in the PIE: Group 1 interrupt 7
+    PieCtrlRegs.PIEIER1.bit.INTx7 = 1;
 
 
     // Enable global Interrupts and higher priority real-time debug events
@@ -254,6 +292,48 @@ void main(void)
     }
 }
 
+//CPU Timer function call (by Mate 2018.09.16.)---------------------------------------------------------------
+__interrupt void
+cpu_timer0_isr(void)
+{
+    CpuTimer0.InterruptCount++;
+
+    //
+    // Acknowledge this interrupt to receive more interrupts from group 1
+    //
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
+}
+
+//
+// cpu_timer1_isr -
+//
+__interrupt void
+cpu_timer1_isr(void)
+{
+    CpuTimer1.InterruptCount++;
+
+    //
+    // The CPU acknowledges the interrupt
+    //
+    EDIS;
+}
+
+//
+// cpu_timer2_isr -
+//
+__interrupt void
+cpu_timer2_isr(void)
+{
+    EALLOW;
+    CpuTimer2.InterruptCount++;
+
+    //
+    // The CPU acknowledges the interrupt.
+    //
+    EDIS;
+}
+//----------------------------------------------------------------------------------------------
+//ePWM function call
 __interrupt void epwm1_isr(void)
 {
     // Update the CMPA and CMPB values
@@ -268,6 +348,7 @@ __interrupt void epwm1_isr(void)
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
 }
 
+//ADC function call
 __interrupt void adc1_isr(void)
 {
     Voltage1[ConversionCount] = AdcResult.ADCRESULT0;
@@ -346,6 +427,7 @@ void Adc_Config(){
     EPwm1Regs.ETPS.bit.SOCAPRD  = 1;        // Generate pulse on 1st event
 }
 
+//ePWM example
 void
 InitEPwm1Example()
 {
