@@ -157,8 +157,16 @@ void main(void)
 //
 // Step 2. Initalize GPIO:
 //
-    // ADCINA4 ->SOC0 ->GPIO4, ADCINA2 ->SOC1 ->GPIO2:
+    // Current measurement:
+    // ADCINA6 ->SOC0 ->GPIO6, ADCINA7 ->SOC1 ->GPIO7,
+    //
+    // Resolver measurement:
+    // ADCINB0 ->SOC2 ->GPIO8, ADCINB1 ->SOC3 ->GPIO9,
+    //
+    // Voltage measurement:
+    // ADCINB2 ->SOC4 ->GPIO10:
     InitAdcAio();
+
 
     // For this case just init GPIO pins for ePWM1
     InitEPwm1Gpio();
@@ -422,80 +430,6 @@ void update_compare(EPWM_INFO *epwm_info)
         if (j==0)
             j=511;
     }
-
-        /*epwm_info->EPwmTimerIntCount = 0;
-
-        //
-        // If we were increasing CMPA, check to see if we reached the max value
-        // If not, increase CMPA else, change directions and decrease CMPA
-        //
-        if(epwm_info->EPwm_CMPA_Direction == EPWM_CMP_UP)
-        {
-            if(epwm_info->EPwmRegHandle->CMPA.half.CMPA <
-               epwm_info->EPwmMaxCMPA)
-            {
-                epwm_info->EPwmRegHandle->CMPA.half.CMPA++;
-            }
-            else
-            {
-                epwm_info->EPwm_CMPA_Direction = EPWM_CMP_DOWN;
-                epwm_info->EPwmRegHandle->CMPA.half.CMPA--;
-            }
-        }
-
-        //
-        // If we were decreasing CMPA, check to see if we reached the min value
-        // If not, decrease CMPA else, change directions and increase CMPA
-        //
-        else
-        {
-            if(epwm_info->EPwmRegHandle->CMPA.half.CMPA ==
-               epwm_info->EPwmMinCMPA)
-            {
-                epwm_info->EPwm_CMPA_Direction = EPWM_CMP_UP;
-                epwm_info->EPwmRegHandle->CMPA.half.CMPA++;
-            }
-            else
-            {
-                epwm_info->EPwmRegHandle->CMPA.half.CMPA--;
-            }
-        }
-
-        //
-        // If we were increasing CMPB, check to see if we reached the max value
-        // If not, increase CMPB else, change directions and decrease CMPB
-        //
-        if(epwm_info->EPwm_CMPB_Direction == EPWM_CMP_UP)
-        {
-            if(epwm_info->EPwmRegHandle->CMPB < epwm_info->EPwmMaxCMPB)
-            {
-                epwm_info->EPwmRegHandle->CMPB++;
-            }
-            else
-            {
-                epwm_info->EPwm_CMPB_Direction = EPWM_CMP_DOWN;
-                epwm_info->EPwmRegHandle->CMPB--;
-            }
-        }
-
-        //
-        // If we were decreasing CMPB, check to see if we reached the min value
-        // If not, decrease CMPB else, change directions and increase CMPB
-        //
-        else
-        {
-            if(epwm_info->EPwmRegHandle->CMPB == epwm_info->EPwmMinCMPB)
-            {
-                epwm_info->EPwm_CMPB_Direction = EPWM_CMP_UP;
-                epwm_info->EPwmRegHandle->CMPB++;
-            }
-            else
-            {
-                epwm_info->EPwmRegHandle->CMPB--;
-            }
-        }
-    }
-    */
     else
     {
         epwm_info->EPwmTimerIntCount++;
