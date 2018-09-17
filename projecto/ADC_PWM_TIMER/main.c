@@ -399,6 +399,8 @@ __interrupt void epwm1_isr(void)
 
     // Acknowledge this interrupt to receive more interrupts from group 3
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
+
+    return;
 }
 
 //ADC function call
