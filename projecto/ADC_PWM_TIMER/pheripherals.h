@@ -5,6 +5,7 @@
 void Adc1_Config(void);
 __interrupt void adc1_isr(void);
 
+
 //ePWM
 void InitEPwm1Example(void);
 void InitEPwm2Example(void);
@@ -63,6 +64,18 @@ void update_compare(EPWM_INFO*);
 #define EPWM_CMP_UP   1
 #define EPWM_CMP_DOWN 0
 
+
+//TIMER
+__interrupt void cpu_timer0_isr(void);
+__interrupt void cpu_timer1_isr(void);
+__interrupt void cpu_timer2_isr(void);
+
+
+//eCAP
+__interrupt void ecap1_isr(void);
+void InitECapture(void);
+void InitEPwmTimer(void);
+void Fail(void);
 
 
 #endif

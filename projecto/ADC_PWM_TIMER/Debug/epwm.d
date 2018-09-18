@@ -1,65 +1,65 @@
 # FIXED
 
 epwm.obj: ../epwm.c
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/DSP28x_Project.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Device.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Adc.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_BootVars.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Cla.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Comp.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_CpuTimers.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DevEmu.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Dma.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_ECan.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_ECap.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EQep.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Gpio.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_HRCap.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_I2c.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Mcbsp.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_NmiIntrupt.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_PieCtrl.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_PieVect.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Spi.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Sci.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_SysCtrl.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Usb.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_XIntrupt.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Examples.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_GlobalPrototypes.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h
-epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defines.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/DSP28x_Project.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Device.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Adc.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_BootVars.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Cla.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Comp.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_CpuTimers.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DevEmu.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Dma.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_ECan.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_ECap.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EQep.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Gpio.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_HRCap.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_I2c.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Mcbsp.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_NmiIntrupt.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_PieCtrl.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_PieVect.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Spi.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Sci.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_SysCtrl.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Usb.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_XIntrupt.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Examples.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_GlobalPrototypes.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h
+epwm.obj: E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defines.h
 epwm.obj: ../pheripherals.h
 
 ../epwm.c: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/DSP28x_Project.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Device.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Adc.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_BootVars.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Cla.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Comp.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_CpuTimers.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DevEmu.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Dma.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_ECan.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_ECap.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EQep.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Gpio.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_HRCap.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_I2c.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Mcbsp.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_NmiIntrupt.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_PieCtrl.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_PieVect.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Spi.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Sci.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_SysCtrl.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Usb.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_XIntrupt.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Examples.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_GlobalPrototypes.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h: 
-G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defines.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/DSP28x_Project.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Device.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Adc.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_BootVars.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Cla.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Comp.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_CpuTimers.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DevEmu.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Dma.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_ECan.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_ECap.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EQep.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Gpio.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_HRCap.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_I2c.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Mcbsp.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_NmiIntrupt.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_PieCtrl.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_PieVect.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Spi.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Sci.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_SysCtrl.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Usb.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_XIntrupt.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Examples.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_GlobalPrototypes.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h: 
+E:/Github/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defines.h: 
 ../pheripherals.h: 
