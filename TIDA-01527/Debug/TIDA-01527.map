@@ -1,10 +1,10 @@
 ******************************************************************************
-             TMS320C2000 Linker PC v16.9.1                     
+             TMS320C2000 Linker PC v18.1.2                     
 ******************************************************************************
->> Linked Tue Dec 12 16:25:28 2017
+>> Linked Tue Sep 18 16:22:15 2018
 
 OUTPUT FILE NAME:   <TIDA-01527.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 00008256
+ENTRY POINT SYMBOL: "_c_int00"  address: 000082ce
 
 
 MEMORY CONFIGURATION
@@ -14,7 +14,7 @@ MEMORY CONFIGURATION
 PAGE 0:
   BEGIN                 00000000   00000002  00000002  00000000  RWIX
   RAMM0                 00000050   000003b0  0000001a  00000396  RWIX
-  RAML0_L7              00008000   0000a000  00000517  00009ae9  RWIX
+  RAML0_L7              00008000   0000a000  00000628  000099d8  RWIX
   FPUTABLES             003fd590   000006a0  00000000  000006a0  RWIX
   IQTABLES              003fdc30   00000b50  00000b50  00000000  RWIX
   IQTABLES2             003fe780   0000008c  00000000  0000008c  RWIX
@@ -91,53 +91,54 @@ codestart
                   00000000    00000002     F2806x_CodeStartBranch.obj (codestart)
 
 .cinit     0    00000050    0000001a     
-                  00000050    0000000e     rts2800_fpu32.lib : exit.obj (.cinit)
-                  0000005e    00000005                       : _lock.obj (.cinit:__lock)
-                  00000063    00000005                       : _lock.obj (.cinit:__unlock)
+                  00000050    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  0000005e    00000005                       : _lock.c.obj (.cinit:__lock)
+                  00000063    00000005                       : _lock.c.obj (.cinit:__unlock)
                   00000068    00000002     --HOLE-- [fill = 0]
 
-.text      0    00008000    00000377     
+.text      0    00008000    000003d8     
                   00008000    0000017e     hal.obj (.text)
-                  0000817e    000000d8     resolver.obj (.text)
-                  00008256    00000056     rts2800_fpu32.lib : boot28.obj (.text)
-                  000082ac    00000033     main.obj (.text)
-                  000082df    00000029     rts2800_fpu32.lib : exit.obj (.text)
-                  00008308    00000024                       : cpy_tbl.obj (.text)
-                  0000832c    0000001e                       : memcpy.obj (.text)
-                  0000834a    00000019                       : args_main.obj (.text)
-                  00008363    00000009                       : _lock.obj (.text)
-                  0000836c    00000008     F2806x_CodeStartBranch.obj (.text)
-                  00008374    00000002     rts2800_fpu32.lib : pre_init.obj (.text)
-                  00008376    00000001                       : startup.obj (.text)
+                  0000817e    00000150     resolver.obj (.text)
+                  000082ce    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  00008324    00000029                       : exit.c.obj (.text)
+                  0000834d    00000024                       : cpy_tbl.c.obj (.text)
+                  00008371    0000001e                       : memcpy.c.obj (.text)
+                  0000838f    0000001c     main.obj (.text)
+                  000083ab    00000019     rts2800_fpu32.lib : args_main.c.obj (.text)
+                  000083c4    00000009                       : _lock.c.obj (.text)
+                  000083cd    00000008     F2806x_CodeStartBranch.obj (.text)
+                  000083d5    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+                  000083d7    00000001                       : startup.c.obj (.text)
 
-ramfuncs   0    00008377    000000c4     
-                  00008377    0000006f     resolver.obj (ramfuncs)
-                  000083e6    00000031     main.obj (ramfuncs:retain)
-                  00008417    00000020     hal.obj (ramfuncs)
-                  00008437    00000004     F2806x_usDelay.obj (ramfuncs)
+ramfuncs   0    000083d8    00000150     
+                  000083d8    000000fb     resolver.obj (ramfuncs)
+                  000084d3    00000031     main.obj (ramfuncs:retain)
+                  00008504    00000020     hal.obj (ramfuncs)
+                  00008524    00000004     F2806x_usDelay.obj (ramfuncs)
 
 .pinit     0    00000050    00000000     UNINITIALIZED
 
 .reset     0    003fffc0    00000002     DSECT
-                  003fffc0    00000002     rts2800_fpu32.lib : boot28.obj (.reset)
+                  003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
 
-IQmath     0    0000843b    000000ba     
-                  0000843b    00000088     IQmath_fpu32.lib : IQ19atan2PU.obj (IQmath)
-                  000084c3    00000029                      : IQ19sinPU.obj (IQmath)
-                  000084ec    00000009                      : IQ19int.obj (IQmath)
+.ebss      0    000085e2    00000046     UNINITIALIZED
+                  000085e2    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  000085e8    00000002                       : _lock.c.obj (.ebss:__lock)
+                  000085ea    00000002                       : _lock.c.obj (.ebss:__unlock)
+                  000085ec    00000014     --HOLE--
+                  00008600    00000028     main.obj (.ebss)
 
-.ebss      0    000084f6    00000022     UNINITIALIZED
-                  000084f6    00000006     rts2800_fpu32.lib : exit.obj (.ebss)
-                  000084fc    00000002                       : _lock.obj (.ebss:__lock)
-                  000084fe    00000002                       : _lock.obj (.ebss:__unlock)
-                  00008500    00000018     main.obj (.ebss)
+.stack     1    00000400    00000300     UNINITIALIZED
+                  00000400    00000300     --HOLE--
+
+IQmath     0    00008528    000000ba     
+                  00008528    00000088     IQmath_fpu32.lib : IQ19atan2PU.obj (IQmath)
+                  000085b0    00000029                      : IQ19sinPU.obj (IQmath)
+                  000085d9    00000009                      : IQ19int.obj (IQmath)
 
 IQmathTables 
 *          0    003fdc30    00000b50     NOLOAD SECTION
                   003fdc30    00000b50     IQmath_fpu32.lib : IQmathTables.obj (IQmathTables)
-
-.stack     1    00000400    00000300     UNINITIALIZED
-                  00000400    00000300     --HOLE--
 
 DevEmuRegsFile 
 *          1    00000880    00000004     UNINITIALIZED
@@ -373,13 +374,13 @@ MODULE SUMMARY
        ------                          ----   ----------------   ------------------
     .\
        F2806x_GlobalVariableDefs.obj   0      0                  3550              
+       resolver.obj                    587    0                  0                 
        hal.obj                         414    0                  0                 
-       resolver.obj                    327    0                  0                 
-       main.obj                        100    0                  24                
+       main.obj                        77     0                  40                
        F2806x_CodeStartBranch.obj      10     0                  0                 
        F2806x_usDelay.obj              4      0                  0                 
     +--+-------------------------------+------+------------------+--------------------+
-       Total:                          855    0                  3574              
+       Total:                          1092   0                  3590              
                                                                                    
     ../include/IQmath_fpu32.lib
        IQmathTables.obj                0      2896               0                 
@@ -389,21 +390,21 @@ MODULE SUMMARY
     +--+-------------------------------+------+------------------+--------------------+
        Total:                          186    2896               0                 
                                                                                    
-    C:\ti\ccsv7\tools\compiler\ti-cgt-c2000_16.9.1.LTS\lib\rts2800_fpu32.lib
-       boot28.obj                      86     0                  0                 
-       exit.obj                        41     14                 6                 
-       cpy_tbl.obj                     36     0                  0                 
-       memcpy.obj                      30     0                  0                 
-       args_main.obj                   25     0                  0                 
-       _lock.obj                       9      10                 4                 
-       pre_init.obj                    2      0                  0                 
-       startup.obj                     1      0                  0                 
+    G:\Programok\ti - Szakdoga\ccsv8\tools\compiler\ti-cgt-c2000_18.1.2.LTS\lib\rts2800_fpu32.lib
+       boot28.asm.obj                  86     0                  0                 
+       exit.c.obj                      41     14                 6                 
+       cpy_tbl.c.obj                   36     0                  0                 
+       memcpy.c.obj                    30     0                  0                 
+       args_main.c.obj                 25     0                  0                 
+       _lock.c.obj                     9      10                 4                 
+       pre_init.c.obj                  2      0                  0                 
+       startup.c.obj                   1      0                  0                 
     +--+-------------------------------+------+------------------+--------------------+
        Total:                          230    24                 10                
                                                                                    
        Stack:                          0      0                  768               
     +--+-------------------------------+------+------------------+--------------------+
-       Grand Total:                    1271   2920               4352              
+       Grand Total:                    1508   2920               4368              
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -507,13 +508,13 @@ address     data page           name
 
 00007900     1e4 (00007900)     _I2caRegs
 
-000084f6     213 (000084c0)     ___TI_enable_exit_profile_output
-000084f8     213 (000084c0)     ___TI_cleanup_ptr
-000084fa     213 (000084c0)     ___TI_dtors_ptr
-000084fc     213 (000084c0)     __lock
-000084fe     213 (000084c0)     __unlock
+000085e2     217 (000085c0)     ___TI_enable_exit_profile_output
+000085e4     217 (000085c0)     ___TI_cleanup_ptr
+000085e6     217 (000085c0)     ___TI_dtors_ptr
+000085e8     217 (000085c0)     __lock
+000085ea     217 (000085c0)     __unlock
 
-00008500     214 (00008500)     _res
+00008600     218 (00008600)     _res
 
 003d7e80    f5fa (003d7e80)     _PartIdRegs
 
@@ -588,7 +589,7 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                            
 ----  -------   ----                            
 0     00008000  .text                           
-0     000082df  C$$EXIT                         
+0     00008324  C$$EXIT                         
 1     00007100  _AdcRegs                        
 1     00000b00  _AdcResult                      
 1     00001400  _Cla1Regs                       
@@ -600,7 +601,7 @@ page  address   name
 1     00000c10  _CpuTimer2Regs                  
 1     003f7ff8  _CsmPwl                         
 1     00000ae0  _CsmRegs                        
-0     00008437  _DSP28x_usDelay                 
+0     00008524  _DSP28x_usDelay                 
 1     00000880  _DevEmuRegs                     
 1     00001000  _DmaRegs                        
 1     00006040  _ECanaLAMRegs                   
@@ -687,10 +688,10 @@ page  address   name
 1     003d7e80  _PartIdRegs                     
 1     00000ce0  _PieCtrlRegs                    
 1     00000d00  _PieVectTable                   
-0     0000843b  _RamfuncsLoadEnd                
-abs   000000c4  _RamfuncsLoadSize               
-0     00008377  _RamfuncsLoadStart              
-0     00008377  _RamfuncsRunStart               
+0     00008528  _RamfuncsLoadEnd                
+abs   00000150  _RamfuncsLoadSize               
+0     000083d8  _RamfuncsLoadStart              
+0     000083d8  _RamfuncsRunStart               
 1     00007050  _SciaRegs                       
 1     00007750  _ScibRegs                       
 1     00007040  _SpiaRegs                       
@@ -699,44 +700,44 @@ abs   000000c4  _RamfuncsLoadSize
 1     00000985  _SysPwrCtrlRegs                 
 1     00004000  _Usb0Regs                       
 1     00007070  _XIntruptRegs                   
-0     0000843b  __IQ19atan2PU                   
-0     000084ec  __IQ19int                       
-0     000084c3  __IQ19sinPU                     
+0     00008528  __IQ19atan2PU                   
+0     000085d9  __IQ19int                       
+0     000085b0  __IQ19sinPU                     
 1     00000700  __STACK_END                     
 abs   00000300  __STACK_SIZE                    
-0     000084f8  ___TI_cleanup_ptr               
-0     000084fa  ___TI_dtors_ptr                 
-0     000084f6  ___TI_enable_exit_profile_output
+0     000085e4  ___TI_cleanup_ptr               
+0     000085e6  ___TI_dtors_ptr                 
+0     000085e2  ___TI_enable_exit_profile_output
 abs   ffffffff  ___TI_pprof_out_hndl            
 abs   ffffffff  ___TI_prof_data_size            
 abs   ffffffff  ___TI_prof_data_start           
 abs   ffffffff  ___binit__                      
 abs   ffffffff  ___c_args__                     
 0     00000050  ___cinit__                      
-0     00008377  ___etext__                      
+0     000083d8  ___etext__                      
 abs   ffffffff  ___pinit__                      
 0     00008000  ___text__                       
-0     0000834a  __args_main                     
-0     000084fc  __lock                          
-0     0000836b  __nop                           
-0     00008367  __register_lock                 
-0     00008363  __register_unlock               
+0     000083ab  __args_main                     
+0     000085e8  __lock                          
+0     000083cc  __nop                           
+0     000083c8  __register_lock                 
+0     000083c4  __register_unlock               
 1     00000400  __stack                         
-0     00008376  __system_post_cinit             
-0     00008374  __system_pre_init               
-0     000084fe  __unlock                        
-0     000082df  _abort                          
-0     00008256  _c_int00                        
-0     00008308  _copy_in                        
-0     000083e6  _epwm1_isr                      
-0     000082e1  _exit                           
+0     000083d7  __system_post_cinit             
+0     000083d5  __system_pre_init               
+0     000085ea  __unlock                        
+0     00008324  _abort                          
+0     000082ce  _c_int00                        
+0     0000834d  _copy_in                        
+0     000084d3  _epwm1_isr                      
+0     00008326  _exit                           
 0     000080ce  _hal_Assert                     
-0     0000842e  _hal_ClearePWMFlags             
+0     0000851b  _hal_ClearePWMFlags             
 0     00008000  _hal_DisableWDT                 
 0     00008173  _hal_GlobalIsrDisable           
 0     00008176  _hal_GlobalIsrEnable            
 0     000080f5  _hal_InitADC                    
-0     00008417  _hal_InitFlash                  
+0     00008504  _hal_InitFlash                  
 0     00008080  _hal_InitGPIOs                  
 0     00008099  _hal_InitPIE                    
 0     000080d0  _hal_InitPWM                    
@@ -745,19 +746,20 @@ abs   ffffffff  ___pinit__
 0     00008154  _hal_InitSysCtrl                
 0     00008008  _hal_IntOsc1Sel                 
 0     00008179  _hal_toggle_LED                 
-0     000082ac  _main                           
-0     0000832c  _memcpy                         
-0     00008500  _res                            
+0     0000838f  _main                           
+0     00008371  _memcpy                         
+0     00008600  _res                            
 0     0000817e  _res_CalcAngle                  
-0     000081a0  _res_DCoffsetCalibration        
-0     00008252  _res_Diag                       
-0     000081fd  _res_FindSamplAngle             
-0     00008192  _res_Init                       
-0     00008377  _res_PWMInterrupt               
+0     000081aa  _res_CalcAngleScatered          
+0     000081fa  _res_DCoffsetCalibration        
+0     000082ca  _res_Diag                       
+0     00008275  _res_FindSamplAngle             
+0     000081e0  _res_Init                       
+0     000083d8  _res_PWMInterrupt               
 abs   ffffffff  binit                           
 0     00000050  cinit                           
 0     00000000  code_start                      
-0     00008377  etext                           
+0     000083d8  etext                           
 abs   ffffffff  pinit                           
 
 
@@ -784,42 +786,43 @@ page  address   name
 0     00008176  _hal_GlobalIsrEnable            
 0     00008179  _hal_toggle_LED                 
 0     0000817e  _res_CalcAngle                  
-0     00008192  _res_Init                       
-0     000081a0  _res_DCoffsetCalibration        
-0     000081fd  _res_FindSamplAngle             
-0     00008252  _res_Diag                       
-0     00008256  _c_int00                        
-0     000082ac  _main                           
-0     000082df  C$$EXIT                         
-0     000082df  _abort                          
-0     000082e1  _exit                           
-0     00008308  _copy_in                        
-0     0000832c  _memcpy                         
-0     0000834a  __args_main                     
-0     00008363  __register_unlock               
-0     00008367  __register_lock                 
-0     0000836b  __nop                           
-0     00008374  __system_pre_init               
-0     00008376  __system_post_cinit             
-0     00008377  _RamfuncsLoadStart              
-0     00008377  _RamfuncsRunStart               
-0     00008377  ___etext__                      
-0     00008377  _res_PWMInterrupt               
-0     00008377  etext                           
-0     000083e6  _epwm1_isr                      
-0     00008417  _hal_InitFlash                  
-0     0000842e  _hal_ClearePWMFlags             
-0     00008437  _DSP28x_usDelay                 
-0     0000843b  _RamfuncsLoadEnd                
-0     0000843b  __IQ19atan2PU                   
-0     000084c3  __IQ19sinPU                     
-0     000084ec  __IQ19int                       
-0     000084f6  ___TI_enable_exit_profile_output
-0     000084f8  ___TI_cleanup_ptr               
-0     000084fa  ___TI_dtors_ptr                 
-0     000084fc  __lock                          
-0     000084fe  __unlock                        
-0     00008500  _res                            
+0     000081aa  _res_CalcAngleScatered          
+0     000081e0  _res_Init                       
+0     000081fa  _res_DCoffsetCalibration        
+0     00008275  _res_FindSamplAngle             
+0     000082ca  _res_Diag                       
+0     000082ce  _c_int00                        
+0     00008324  C$$EXIT                         
+0     00008324  _abort                          
+0     00008326  _exit                           
+0     0000834d  _copy_in                        
+0     00008371  _memcpy                         
+0     0000838f  _main                           
+0     000083ab  __args_main                     
+0     000083c4  __register_unlock               
+0     000083c8  __register_lock                 
+0     000083cc  __nop                           
+0     000083d5  __system_pre_init               
+0     000083d7  __system_post_cinit             
+0     000083d8  _RamfuncsLoadStart              
+0     000083d8  _RamfuncsRunStart               
+0     000083d8  ___etext__                      
+0     000083d8  _res_PWMInterrupt               
+0     000083d8  etext                           
+0     000084d3  _epwm1_isr                      
+0     00008504  _hal_InitFlash                  
+0     0000851b  _hal_ClearePWMFlags             
+0     00008524  _DSP28x_usDelay                 
+0     00008528  _RamfuncsLoadEnd                
+0     00008528  __IQ19atan2PU                   
+0     000085b0  __IQ19sinPU                     
+0     000085d9  __IQ19int                       
+0     000085e2  ___TI_enable_exit_profile_output
+0     000085e4  ___TI_cleanup_ptr               
+0     000085e6  ___TI_dtors_ptr                 
+0     000085e8  __lock                          
+0     000085ea  __unlock                        
+0     00008600  _res                            
 0     003fdc30  _IQsinTable                     
 0     003fdd30  _IQcosTable                     
 0     003fe030  _IQsinTableEnd                  
@@ -927,7 +930,7 @@ page  address   name
 1     00007900  _I2caRegs                       
 1     003d7e80  _PartIdRegs                     
 1     003f7ff8  _CsmPwl                         
-abs   000000c4  _RamfuncsLoadSize               
+abs   00000150  _RamfuncsLoadSize               
 abs   00000300  __STACK_SIZE                    
 abs   ffffffff  ___TI_pprof_out_hndl            
 abs   ffffffff  ___TI_prof_data_size            
@@ -938,4 +941,4 @@ abs   ffffffff  ___pinit__
 abs   ffffffff  binit                           
 abs   ffffffff  pinit                           
 
-[172 symbols]
+[173 symbols]

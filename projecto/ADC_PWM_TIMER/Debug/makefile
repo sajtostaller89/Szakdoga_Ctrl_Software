@@ -4,12 +4,15 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccs820/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS
+CG_TOOL_ROOT := G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./adc.obj" \
+"./epwm.obj" \
+"./gpio.obj" \
 "./main.obj" \
 "./Source/F2806x_Adc.obj" \
 "./Source/F2806x_CodeStartBranch.obj" \
@@ -165,22 +168,22 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 ADC_PWM_TIMER.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C2000 Linker'
-	"C:/ti/ccs820/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --vcu_support=vcu0 -g --diag_warning=225 --diag_wrap=off --display_error_number -z -m"ADC_PWM_TIMER.map" --stack_size=0x300 --warn_sections -i"C:/ti/ccs820/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/lib" -i"C:/ti/ccs820/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="ADC_PWM_TIMER_linkInfo.xml" --rom_model -o "ADC_PWM_TIMER.out" $(ORDERED_OBJS)
+	"G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --vcu_support=vcu0 -g --diag_warning=225 --diag_wrap=off --display_error_number -z -m"ADC_PWM_TIMER.map" --stack_size=0x300 --warn_sections -i"G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/lib" -i"G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="ADC_PWM_TIMER_linkInfo.xml" --rom_model -o "ADC_PWM_TIMER.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 ADC_PWM_TIMER.hex: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: C2000 Hex Utility'
-	"C:/ti/ccs820/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/bin/hex2000"  -o "ADC_PWM_TIMER.hex" $(EXE_OUTPUTS__QUOTED)
+	"G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/hex2000"  -o "ADC_PWM_TIMER.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "Source\F2806x_Adc.obj" "Source\F2806x_CodeStartBranch.obj" "Source\F2806x_Comp.obj" "Source\F2806x_CpuTimers.obj" "Source\F2806x_DefaultIsr.obj" "Source\F2806x_Dma.obj" "Source\F2806x_ECan.obj" "Source\F2806x_ECap.obj" "Source\F2806x_EPwm.obj" "Source\F2806x_EQep.obj" "Source\F2806x_GlobalVariableDefs.obj" "Source\F2806x_Gpio.obj" "Source\F2806x_HRCap.obj" "Source\F2806x_I2C.obj" "Source\F2806x_Mcbsp.obj" "Source\F2806x_OscComp.obj" "Source\F2806x_PieCtrl.obj" "Source\F2806x_PieVect.obj" "Source\F2806x_Sci.obj" "Source\F2806x_Spi.obj" "Source\F2806x_SysCtrl.obj" "Source\F2806x_usDelay.obj" 
-	-$(RM) "main.d" "Source\F2806x_Adc.d" "Source\F2806x_Comp.d" "Source\F2806x_CpuTimers.d" "Source\F2806x_DefaultIsr.d" "Source\F2806x_Dma.d" "Source\F2806x_ECan.d" "Source\F2806x_ECap.d" "Source\F2806x_EPwm.d" "Source\F2806x_EQep.d" "Source\F2806x_GlobalVariableDefs.d" "Source\F2806x_Gpio.d" "Source\F2806x_HRCap.d" "Source\F2806x_I2C.d" "Source\F2806x_Mcbsp.d" "Source\F2806x_OscComp.d" "Source\F2806x_PieCtrl.d" "Source\F2806x_PieVect.d" "Source\F2806x_Sci.d" "Source\F2806x_Spi.d" "Source\F2806x_SysCtrl.d" 
+	-$(RM) "adc.obj" "epwm.obj" "gpio.obj" "main.obj" "Source\F2806x_Adc.obj" "Source\F2806x_CodeStartBranch.obj" "Source\F2806x_Comp.obj" "Source\F2806x_CpuTimers.obj" "Source\F2806x_DefaultIsr.obj" "Source\F2806x_Dma.obj" "Source\F2806x_ECan.obj" "Source\F2806x_ECap.obj" "Source\F2806x_EPwm.obj" "Source\F2806x_EQep.obj" "Source\F2806x_GlobalVariableDefs.obj" "Source\F2806x_Gpio.obj" "Source\F2806x_HRCap.obj" "Source\F2806x_I2C.obj" "Source\F2806x_Mcbsp.obj" "Source\F2806x_OscComp.obj" "Source\F2806x_PieCtrl.obj" "Source\F2806x_PieVect.obj" "Source\F2806x_Sci.obj" "Source\F2806x_Spi.obj" "Source\F2806x_SysCtrl.obj" "Source\F2806x_usDelay.obj" 
+	-$(RM) "adc.d" "epwm.d" "gpio.d" "main.d" "Source\F2806x_Adc.d" "Source\F2806x_Comp.d" "Source\F2806x_CpuTimers.d" "Source\F2806x_DefaultIsr.d" "Source\F2806x_Dma.d" "Source\F2806x_ECan.d" "Source\F2806x_ECap.d" "Source\F2806x_EPwm.d" "Source\F2806x_EQep.d" "Source\F2806x_GlobalVariableDefs.d" "Source\F2806x_Gpio.d" "Source\F2806x_HRCap.d" "Source\F2806x_I2C.d" "Source\F2806x_Mcbsp.d" "Source\F2806x_OscComp.d" "Source\F2806x_PieCtrl.d" "Source\F2806x_PieVect.d" "Source\F2806x_Sci.d" "Source\F2806x_Spi.d" "Source\F2806x_SysCtrl.d" 
 	-$(RM) "Source\F2806x_CodeStartBranch.d" "Source\F2806x_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
