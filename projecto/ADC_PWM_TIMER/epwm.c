@@ -122,8 +122,8 @@ InitEPwm1Example()
 
 
     // Set Compare values
-    EPwm1Regs.CMPA.half.CMPA = sinelookup[0];       // Set compare A value used to be 1
-    EPwm1Regs.CMPB = sinelookup[511];               // Set Compare B value used to be 1
+    EPwm1Regs.CMPA.half.CMPA = EPWM1_MIN_CMPA;//sinelookup[0];       // Set compare A value used to be 1
+    EPwm1Regs.CMPB = EPWM1_MAX_CMPB;//sinelookup[511];               // Set Compare B value used to be 1
 
 
     // Set actions

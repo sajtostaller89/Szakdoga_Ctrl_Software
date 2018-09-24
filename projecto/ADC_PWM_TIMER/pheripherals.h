@@ -35,10 +35,10 @@ void update_compare(EPWM_INFO*);
 // Defines that configure the period for each timer
 //
 #define EPWM1_TIMER_TBPRD  3000  // Period register
-#define EPWM1_MAX_CMPA     2999 //holtido benne legyen 2 orajelciklusnyi
-#define EPWM1_MIN_CMPA      1
-#define EPWM1_MAX_CMPB     2999
-#define EPWM1_MIN_CMPB      1
+#define EPWM1_MAX_CMPA     2950 //modified
+#define EPWM1_MIN_CMPA      50
+#define EPWM1_MAX_CMPB     2950
+#define EPWM1_MIN_CMPB      50
 
 #define EPWM2_TIMER_TBPRD  2000  // Period register
 #define EPWM2_MAX_CMPA     1950
