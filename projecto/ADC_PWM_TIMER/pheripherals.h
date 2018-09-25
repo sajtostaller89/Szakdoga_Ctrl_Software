@@ -56,7 +56,7 @@ void update_compare(EPWM_INFO*);
 #define EPWM_TIMER_UP   1
 #define EPWM_TIMER_DOWN 0
 #define PWM1_TIMER_MIN     10
-#define PWM1_TIMER_MAX     2900
+#define PWM1_TIMER_MAX     1900
 
 
 // Defines to keep track of which way the compare value is moving

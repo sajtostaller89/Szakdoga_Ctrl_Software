@@ -122,8 +122,8 @@ InitEPwm1Example()
 
 
     // Set Compare values
-    EPwm1Regs.CMPA.half.CMPA = EPWM1_MIN_CMPA;//sinelookup[0];       // Set compare A value used to be 1
-    EPwm1Regs.CMPB = EPWM1_MAX_CMPB;//sinelookup[511];               // Set Compare B value used to be 1
+    EPwm1Regs.CMPA.half.CMPA = sinelookup[0]; //EPWM1_MIN_CMPA;      // Set compare A value used to be 1
+    EPwm1Regs.CMPB = sinelookup[511]; //EPWM1_MAX_CMPB;               // Set Compare B value used to be 1
 
 
     // Set actions
@@ -179,8 +179,9 @@ void update_compare(EPWM_INFO *epwm_info)
     //
     // Every 10'th interrupt, change the CMPA/CMPB values
     //
-    if(epwm_info->EPwmTimerIntCount == 1000)
+    if(epwm_info->EPwmTimerIntCount == 1000) //why 1000?
     {
+        //epwm_info->EPwmTimerIntCount = 0; //additional line
         i++;
         j--;
         epwm_info->EPwmRegHandle->CMPA.half.CMPA = sinelookup[i];
