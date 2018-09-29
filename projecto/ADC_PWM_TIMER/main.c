@@ -146,7 +146,6 @@ void main(void)
     EINT;   // Enable Global interrupt INTM
     ERTM;   // Enable Global realtime interrupt DBGM
 
-//
 // Step 6. IDLE loop. Just sit and loop forever (optional)
 //
 
