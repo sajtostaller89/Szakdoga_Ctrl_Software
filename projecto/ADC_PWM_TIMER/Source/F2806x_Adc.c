@@ -128,12 +128,16 @@ InitAdcAio()
     // Comment out other unwanted lines.
     //
 
-    // ADCINA7 and ADCINB0-1 are already set by default the way we use them
+
+    //
+    // Configure AIO4 for A2 (analog input) operation
+    //
+    GpioCtrlRegs.AIOMUX1.bit.AIO2 = 2;
     
     //
-    // Configure AIO6 for A6 (analog input) operation
+    // Configure AIO4 for A4 (analog input) operation
     //
-    GpioCtrlRegs.AIOMUX1.bit.AIO6 = 2;
+    GpioCtrlRegs.AIOMUX1.bit.AIO4 = 2;
     
     //
     // Configure AIO10 for B2 (analog input) operation

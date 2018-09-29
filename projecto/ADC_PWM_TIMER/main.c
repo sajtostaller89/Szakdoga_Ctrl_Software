@@ -17,17 +17,17 @@ void main(void)
 // Step 2. Initalize GPIO:
 //
     // Current measurement:
-    // ADCINA6 ->SOC0 ->GPIO6, ADCINA7 ->SOC1 ->GPIO7,
+    // ADCINA1 ->SOC0 ->PIN29, ADCINB1 ->SOC1 ->PIN23,
     //
     // Resolver measurement:
-    // ADCINB0 ->SOC2 ->GPIO8, ADCINB1 ->SOC3 ->GPIO9,
+    // ADCINA2 ->SOC2 ->PIN17, ADCINB2 ->SOC3 ->PIN24,
     //
     // Voltage measurement:
-    // ADCINB2 ->SOC4 ->GPIO10:
-    InitAdcAio();
+    // ADCINA4 ->SOC4 ->PIN16:
+    InitAdcAio();   //not necessary maybe
 
 
-    // For this case just init GPIO pins for ePWM1
+    // Init GPIO pins for ePWM1
     InitEPwm1Gpio();
 
 
@@ -40,11 +40,8 @@ void main(void)
     DINT;
 
 
-    // Initialize the PIE control registers to their default state.
-    // The default state is all PIE interrupts disabled and flags
-    // are cleared.
+    // Initialize the PIE control registers to their default state. The default state is all PIE interrupts disabled and flags are cleared.
     InitPieCtrl();
-
 
     // Disable CPU interrupts and clear all CPU interrupt flags
     IER = 0x0000;
@@ -53,9 +50,9 @@ void main(void)
 
     // Initialize the PIE vector table with pointers to the shell Interrupt
     // Service Routines (ISR).
-    // This will populate the entire table, even if the interrupt
-    // is not used in this example.  This is useful for debug purposes.
+    // This will populate the entire table, even if the interrupt is not used in this example.
     InitPieVectTable();
+    ConfigPieVectTable(); //TODO: The section below should be moved into this function
 
 
     // Interrupts that are used are re-mapped to
@@ -79,9 +76,12 @@ void main(void)
 //
 
     // Initialize the ADCs
-    InitAdc();
-    AdcOffsetSelfCal();
-    Adc1_Config();
+    InitAdc();          // General initialization
+    AdcOffsetSelfCal(); // Offset compensation
+    Adc_Config();       // General settings
+    Adc1_Config();      // Current measurement
+    Adc2_Config();      // Resolver measurement
+    Adc4_Config();      // Voltage measurement
 
 
     // Initialize the ePWMs

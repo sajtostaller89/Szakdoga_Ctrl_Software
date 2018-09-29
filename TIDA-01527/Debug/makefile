@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS
+CG_TOOL_ROOT := G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -156,14 +156,14 @@ main-build: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 TIDA-01527.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C2000 Linker'
-	"G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --vcu_support=vcu0 --advice:performance=all -g --diag_warning=225 --diag_wrap=off --display_error_number -z -m"TIDA-01527.map" --stack_size=0x300 --warn_sections -i"G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/lib" -i"G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="TIDA-01527_linkInfo.xml" --rom_model -o "TIDA-01527.out" $(ORDERED_OBJS)
+	"G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --vcu_support=vcu0 --advice:performance=all -g --diag_warning=225 --diag_wrap=off --display_error_number -z -m"TIDA-01527.map" --stack_size=0x300 --warn_sections -i"G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/lib" -i"G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="TIDA-01527_linkInfo.xml" --rom_model -o "TIDA-01527.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 TIDA-01527.hex: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: C2000 Hex Utility'
-	"G:/Programok/ti - Szakdoga/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/bin/hex2000"  -o "TIDA-01527.hex" $(EXE_OUTPUTS__QUOTED)
+	"G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/bin/hex2000"  -o "TIDA-01527.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
