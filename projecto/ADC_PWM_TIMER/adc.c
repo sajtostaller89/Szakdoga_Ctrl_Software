@@ -38,7 +38,7 @@ void Adc1_Config(){
     // Assumes ePWM1 clock is already enabled in InitSysCtrl(); ePWM1 triggers current measurement
     EPwm1Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
     EPwm1Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD TODO:or this should be cmpa?
-    EPwm1Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on 1st event
+    EPwm1Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
 }
 
 void Adc2_Config(){
@@ -60,7 +60,7 @@ void Adc2_Config(){
     // Assumes ePWM2 clock is already enabled in InitSysCtrl(); ePWM2 triggers resolver measurement
     EPwm2Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
     EPwm2Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD
-    EPwm2Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on 1st event
+    EPwm2Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
 }
 
 void Adc4_Config(){
@@ -69,14 +69,19 @@ void Adc4_Config(){
 //
 
     EALLOW;
-    AdcRegs.ADCSAMPLEMODE.bit.SIMULEN2 = 1;     // SOC2 & SOC3
-
-    AdcRegs.ADCSOC4CTL.bit.CHSEL    = 4;        //SOC4 TO A4 & b4
-
-    // set SOC4 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
-    AdcRegs.ADCSOC4CTL.bit.ACQPS    = 6;
-
+    AdcRegs.INTSEL3N4.bit.INT3E         = 1;    // Enabled ADCINT3
+    AdcRegs.INTSEL3N4.bit.INT3CONT      = 0;    // Disable ADCINT3 Continuous mode
+    AdcRegs.INTSEL3N4.bit.INT3SEL       = 4;    // setup EOC4 to trigger ADCINT3 to fire, this way an interrupt occurs when both samples are ready
+    AdcRegs.ADCSOC4CTL.bit.CHSEL        = 4;    // SOC4 TO A4
+    AdcRegs.ADCSOC4CTL.bit.CHSEL        = 4;    // set SOC4 channel select to ADCINA4
+    AdcRegs.ADCSOC4CTL.bit.TRIGSEL      = 9;    // SOC4 triggered by ePWM3.ADCSOCA
+    AdcRegs.ADCSOC4CTL.bit.ACQPS        = 6;    // set SOC4 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     EDIS;
+
+    // Assumes ePWM2 clock is already enabled in InitSysCtrl(); ePWM2 triggers resolver measurement
+    EPwm2Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
+    EPwm2Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD
+    EPwm2Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
 }
 
 //ADC function call
