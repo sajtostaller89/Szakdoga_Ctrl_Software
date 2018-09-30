@@ -3,6 +3,17 @@
  *
  *  Created on: 2018. szept. 18.
  *      Author: Ákos
+ *
+ *
+ * Current measurement:
+ * ADCINA1 ->SOC0 ->PIN29, ADCINB1 ->SOC1 ->PIN23,
+ *
+ * Resolver measurement:
+ * ADCINA2 ->SOC2 ->PIN17, ADCINB2 ->SOC3 ->PIN24,
+ *
+ * Voltage measurement:
+ * ADCINA4 ->SOC4 ->PIN16:
+ *
  */
 
 #include "DSP28x_Project.h"     // Device Headerfile and Examples Include File
@@ -11,8 +22,8 @@
 
 
 Uint16 ConversionCount;
-Uint16 Voltage1[10];
-Uint16 Voltage2[10];
+Uint16 Voltage1[1000];
+Uint16 Voltage2[1000];
 
 void Adc_Config(){
     EALLOW;
@@ -87,14 +98,19 @@ void Adc4_Config(){
 //ADC function call
 __interrupt void adc1_isr(void)
 {
+    Uint16 asd = 0;
+    Uint16 value = 0;
     Voltage1[ConversionCount] = AdcResult.ADCRESULT0;
     Voltage2[ConversionCount] = AdcResult.ADCRESULT1;
 
 
-    // If 20 conversions have been logged, start over
-    if(ConversionCount == 9)
+    // If 2000 conversions have been logged, start over
+    if(ConversionCount == 999)
     {
         ConversionCount = 0;
+        for(asd = 0; asd < 999;asd++)
+            value += Voltage1[asd];
+        value/=1000;
     }
     else
     {
