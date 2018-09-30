@@ -12,7 +12,7 @@ C_SRCS += \
 ../adc.c \
 ../ecap.c \
 ../epwm.c \
-../gpio.c \
+../general.c \
 ../main.c \
 ../timer.c 
 
@@ -20,7 +20,7 @@ C_DEPS += \
 ./adc.d \
 ./ecap.d \
 ./epwm.d \
-./gpio.d \
+./general.d \
 ./main.d \
 ./timer.d 
 
@@ -28,7 +28,7 @@ OBJS += \
 ./adc.obj \
 ./ecap.obj \
 ./epwm.obj \
-./gpio.obj \
+./general.obj \
 ./main.obj \
 ./timer.obj 
 
@@ -36,7 +36,7 @@ OBJS__QUOTED += \
 "adc.obj" \
 "ecap.obj" \
 "epwm.obj" \
-"gpio.obj" \
+"general.obj" \
 "main.obj" \
 "timer.obj" 
 
@@ -44,7 +44,7 @@ C_DEPS__QUOTED += \
 "adc.d" \
 "ecap.d" \
 "epwm.d" \
-"gpio.d" \
+"general.d" \
 "main.d" \
 "timer.d" 
 
@@ -52,7 +52,7 @@ C_SRCS__QUOTED += \
 "../adc.c" \
 "../ecap.c" \
 "../epwm.c" \
-"../gpio.c" \
+"../general.c" \
 "../main.c" \
 "../timer.c" 
 

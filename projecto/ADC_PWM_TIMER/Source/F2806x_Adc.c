@@ -120,6 +120,17 @@ InitAdcAio()
 {
     EALLOW;
 
+
+    // Current measurement:
+    // ADCINA1 ->SOC0 ->PIN29, ADCINB1 ->SOC1 ->PIN23,
+    //
+    // Resolver measurement:
+    // ADCINA2 ->SOC2 ->PIN17, ADCINB2 ->SOC3 ->PIN24,
+    //
+    // Voltage measurement:
+    // ADCINA4 ->SOC4 ->PIN16:
+
+
     //
     // Configure ADC pins using AIO regs
     // This specifies which of the possible AIO pins will be Analog input pins.
