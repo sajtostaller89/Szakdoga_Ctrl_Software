@@ -22,6 +22,9 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:ADC_PWM_TIMER}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.E:\Github\Szakdoga_Ctrl_Software\projecto\ADC_PWM_TIMER\targetConfigs\TMS320F28069.ccxml.Texas Instruments XDS100v2 USB Debug Probe_0/C28xx" value="E:/Github\Szakdoga_Ctrl_Software\projecto\ADC_PWM_TIMER\Debug\ADC_PWM_TIMER.out"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.G:\GitHub\Szakdoga_Ctrl_Software\projecto\ADC_PWM_TIMER\targetConfigs\TMS320F28069.ccxml.Texas Instruments XDS100v2 USB Debug Probe_0/C28xx" value="G:/GitHub\Szakdoga_Ctrl_Software\projecto\ADC_PWM_TIMER\Debug\ADC_PWM_TIMER.out"/>
+<mapAttribute key="com.ti.ccstudio.debug.ui.displayFormats">
+<mapEntry key="Texas Instruments XDS100v2 USB Debug Probe_0/C28xx@##separator##@1" value="16-Bit Hex - TI Style"/>
+</mapAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/ADC_PWM_TIMER"/>
 </listAttribute>
@@ -33,4 +36,5 @@
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
 </listAttribute>
+<stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList context=&quot;reserved-for-future-use&quot;/&gt;&#13;&#10;"/>
 </launchConfiguration>

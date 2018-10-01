@@ -24,6 +24,7 @@
 Uint16 ConversionCount;
 Uint16 Voltage1[1000];
 Uint16 Voltage2[1000];
+float32 value = 0;
 
 void Adc_Config(){
     EALLOW;
@@ -99,7 +100,7 @@ void Adc4_Config(){
 __interrupt void adc1_isr(void)
 {
     Uint16 asd = 0;
-    Uint16 value = 0;
+    value = (float32)AdcResult.ADCRESULT0*3.3/4096;
     Voltage1[ConversionCount] = AdcResult.ADCRESULT0;
     Voltage2[ConversionCount] = AdcResult.ADCRESULT1;
 
@@ -125,3 +126,5 @@ __interrupt void adc1_isr(void)
 
     return;
 }
+
+//TODO: create the other interrupts

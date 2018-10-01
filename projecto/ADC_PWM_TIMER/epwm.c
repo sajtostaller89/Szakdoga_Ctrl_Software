@@ -197,7 +197,7 @@ void update_compare(EPWM_INFO *epwm_info)
     }
 }
 
-//Maybe the code belwo would work fine:
+//Maybe the code below would work fine:
 //=====================================================================
 // Configuration
 //=====================================================================
