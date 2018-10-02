@@ -22,9 +22,10 @@
 
 
 Uint16 ConversionCount;
+Uint16 Voltage0[1000];
 Uint16 Voltage1[1000];
-Uint16 Voltage2[1000];
-float32 value = 0;
+float32 value0 = 0.0;
+float32 value1 = 0.0;
 
 void Adc_Config(){
     EALLOW;
@@ -99,19 +100,21 @@ void Adc4_Config(){
 //ADC function call
 __interrupt void adc1_isr(void)
 {
-    Uint16 asd = 0;
-    value = (float32)AdcResult.ADCRESULT0*3.3/4096;
-    Voltage1[ConversionCount] = AdcResult.ADCRESULT0;
-    Voltage2[ConversionCount] = AdcResult.ADCRESULT1;
+    value0 = (float32)AdcResult.ADCRESULT0*3.3/4096;
+    if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
+        value0 = Voltage1[ConversionCount-1];
+    Voltage0[ConversionCount] = value0;
+
+    value1 = (float32)AdcResult.ADCRESULT1*3.3/4096;
+    if(((value1 > 3.3) || (value1 < 0)) && (ConversionCount > 0))
+        value1 = Voltage1[ConversionCount-1];
+    Voltage1[ConversionCount] = value1;
 
 
     // If 2000 conversions have been logged, start over
     if(ConversionCount == 999)
     {
         ConversionCount = 0;
-        for(asd = 0; asd < 999;asd++)
-            value += Voltage1[asd];
-        value/=1000;
     }
     else
     {
