@@ -17,7 +17,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="Block_scheme_P.Ákos_not_done.svg">
+   sodipodi:docname="Block_scheme_P.Ákos_FOC.svg">
   <defs
      id="defs2">
     <pattern
@@ -254,9 +254,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="865.44714"
-     inkscape:cy="528.90169"
+     inkscape:zoom="0.7"
+     inkscape:cx="664.49471"
+     inkscape:cy="225.83257"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -2660,9 +2660,9 @@
       <rect
          style="fill:#000000;fill-opacity:1;stroke:#000005;stroke-width:0.3926276;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect2909-5-6-8-2"
-         width="72.293404"
+         width="58.684235"
          height="0.8635574"
-         x="78.155617"
+         x="91.778191"
          y="29.093367" />
       <path
          sodipodi:type="star"
@@ -3298,10 +3298,10 @@
        y="74.093712" />
     <g
        id="g2913-3-6-8-3-1"
-       transform="matrix(2.3327858,0,0,0.8043246,-241.73252,280.82038)"
-       style="stroke:#0000ff;stroke-width:0.98836303">
+       transform="matrix(2.8608045,0,0,0.8043246,-334.75914,280.82038)"
+       style="stroke:#0000ff;stroke-width:0.89250332">
       <rect
-         style="fill:#000000;fill-opacity:1;stroke:#0000ff;stroke-width:0.4010129;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="fill:#000000;fill-opacity:1;stroke:#0000ff;stroke-width:0.36211932;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect2909-5-6-8-2-1"
          width="82.340874"
          height="0.84428561"
@@ -3311,12 +3311,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="25.983419"
+       x="81.167946"
        y="243.08694"
        id="text4695-2"><tspan
          sodipodi:role="line"
          id="tspan4693-5"
-         x="25.983419"
+         x="81.167946"
          y="243.08694"
          style="font-size:5.64444447px;stroke:#0000ff;stroke-width:0.26458332">Angle</tspan></text>
     <g
@@ -3727,10 +3727,10 @@
     <rect
        style="fill:#f6cc0e;fill-opacity:0.31155778;stroke:#000005;stroke-width:0.352;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect835-4"
-       width="62.555061"
-       height="14.930062"
+       width="90.903275"
+       height="24.379467"
        x="-142.49704"
-       y="279.99112" />
+       y="279.61313" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -3738,13 +3738,66 @@
        y="289.20471"
        id="text616"><tspan
          sodipodi:role="line"
-         id="tspan614"
          x="-140.48878"
-         y="289.20471"
-         style="stroke-width:0.26458332">i<tspan
-   style="font-size:4.23333311px"
-   id="tspan618">q</tspan>, i<tspan
-   style="font-size:4.23333311px"
-   id="tspan620">d</tspan> Calculation</tspan></text>
+         y="295.64172"
+         style="stroke-width:0.26458332"
+         id="tspan528" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-97.024475"
+       y="289.9606"
+       id="text536"><tspan
+         sodipodi:role="line"
+         id="tspan534"
+         x="-139.54384"
+         y="289.9606"
+         style="stroke-width:0.26458332;text-anchor:middle;text-align:center">iq, id Calculation,</tspan><tspan
+         sodipodi:role="line"
+         x="-139.54384"
+         y="298.78006"
+         style="stroke-width:0.26458332;text-anchor:middle;text-align:center"
+         id="tspan538">Flux estimation included</tspan></text>
+    <g
+       id="g3019-7-7-4"
+       transform="matrix(0,0.54522855,-0.96105877,0,-38.25123,203.95153)"
+       style="stroke:#0000ff;stroke-width:0.86690325">
+      <rect
+         style="fill:#000000;fill-opacity:1;stroke:#0000ff;stroke-width:0.30514994;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect3015-1-6-9"
+         width="55.373512"
+         height="0.94494045"
+         x="75.028275"
+         y="29.052675" />
+      <path
+         sodipodi:type="star"
+         style="fill:#000000;fill-opacity:1;stroke:#0000ff;stroke-width:0.15354337;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path3017-2-3-4"
+         sodipodi:sides="3"
+         sodipodi:cx="96.938278"
+         sodipodi:cy="37.836666"
+         sodipodi:r1="2.7577207"
+         sodipodi:r2="1.3788604"
+         sodipodi:arg1="0"
+         sodipodi:arg2="1.0471976"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 99.695999,37.836666 -4.136581,2.388256 V 35.44841 Z"
+         inkscape:transform-center-x="-1.3449011"
+         inkscape:transform-center-y="2.046114e-006"
+         transform="matrix(1.9507605,0,0,0.68577917,-56.420495,3.4546869)" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-86.090073"
+       y="265.69348"
+       id="text4695-2-6-5"><tspan
+         sodipodi:role="line"
+         id="tspan4693-5-3-8"
+         x="-86.090073"
+         y="265.69348"
+         style="font-size:5.64444447px;stroke:#0000ff;stroke-width:0.26458332">Angle</tspan></text>
   </g>
 </svg>
