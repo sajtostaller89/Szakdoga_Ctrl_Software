@@ -1,2 +1,2 @@
+%Generates the workspace constant values for the control
 control_params;
-switching_table_params;

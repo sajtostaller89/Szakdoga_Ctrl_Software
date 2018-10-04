@@ -3,8 +3,8 @@ Tsamp = 0.0001;
 
 %reference values
 Psiref = 1;
-Mref = 12;
-Mref_switch = 1;
+Tref = 12;
+Tref_switch = 1;
 
 %Controller parameters
 %->PID
