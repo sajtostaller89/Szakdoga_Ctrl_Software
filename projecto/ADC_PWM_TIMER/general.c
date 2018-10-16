@@ -8,6 +8,7 @@
 #include "F2806x_Device.h"     // F2806x Headerfile Include File
 #include "F2806x_Examples.h"   // F2806x Examples Include File
 #include "pheripherals.h"
+#include "general.h"
 
 void ConfigPieVectTable(){
 
@@ -63,4 +64,10 @@ void ConfigEnableInterrupts(){
      // Enable global Interrupts and higher priority real-time debug events
      EINT;   // Enable Global interrupt INTM
      ERTM;   // Enable Global realtime interrupt DBGM
+}
+
+double duty_calc(){         //general.h should contain all the necessary values for dclink, etc.
+
+    //return (phase_voltage/dclink_voltage);
+    return 2.0;
 }

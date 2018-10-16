@@ -31,6 +31,7 @@ epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x
 epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h
 epwm.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defines.h
 epwm.obj: ../pheripherals.h
+epwm.obj: ../general.h
 
 ../epwm.c: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/DSP28x_Project.h: 
@@ -63,3 +64,4 @@ G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_GlobalPro
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defines.h: 
 ../pheripherals.h: 
+../general.h: 

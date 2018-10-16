@@ -1,12 +1,13 @@
 #include "DSP28x_Project.h"     // Device Headerfile and Examples Include File
 #include "F2806x_EPwm_defines.h"
 #include "pheripherals.h"
+#include "general.h"
 
 
 //Main
 void main(void)
 {
-// Step 1. Initialize System Control: PLL, WatchDog, enable all Peripheral Clocks TODO:Enable only the ones we use
+// Step 1. Initialize System Control: PLL, WatchDog, enable all Peripheral Clocks TODO:Enable only the ones we use------------------------
 
     InitSysCtrl();
 
