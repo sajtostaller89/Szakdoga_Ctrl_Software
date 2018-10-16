@@ -131,3 +131,52 @@ __interrupt void adc1_isr(void)
 }
 
 //TODO: create the other interrupts
+__interrupt void adc2_isr(void)
+{
+    value0 = (float32)AdcResult.ADCRESULT0*3.3/4096;
+    if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
+        value0 = Voltage1[ConversionCount-1];
+    Voltage0[ConversionCount] = value0;             // cosine
+
+    value1 = (float32)AdcResult.ADCRESULT1*3.3/4096;
+    if(((value1 > 3.3) || (value1 < 0)) && (ConversionCount > 0))
+        value1 = Voltage1[ConversionCount-1];
+    Voltage1[ConversionCount] = value1;
+
+
+    // If 100 conversions have been logged for each channel, start over and get the highest and lowest value's indexes
+    if(ConversionCount == 99)
+    {
+      /*  for(i = 0; i < 99; i++){
+            if (Voltage0[i]>Voltage0[lowest0])
+                lowest0 = i;
+            if (Voltage0[i]<Voltage0[highest0])
+                highest0 = i;
+        }
+        for(i = 0; i < 99; i++){
+            if (Voltage1[i]>Voltage1[lowest0])
+                lowest0 = i;
+            if (Voltage1[i]<Voltage1[highest0])
+                highest0 = i;
+        }
+        Angle00 = IQ19atan(Voltage0[lowest0],Voltage1[lowest0]);
+        Angle01 = IQ19atan(Voltage0[highest0],Voltage1[highest0]);
+        Angle10 = IQ19atan(Voltage0[lowest1],Voltage1[lowest1]);
+        Angle11 = IQ19atan(Voltage0[highest1],Voltage1[highest1]);*/
+
+        ConversionCount = 0;
+    }
+    else
+    {
+        ConversionCount++;
+    }
+
+
+    // Clear ADCINT1 flag reinitialize for next SOC
+    AdcRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
+
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;   // Acknowledge interrupt to PIE
+
+    return;
+}
+
