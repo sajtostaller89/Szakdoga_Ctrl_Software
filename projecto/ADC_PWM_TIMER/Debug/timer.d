@@ -31,6 +31,8 @@ timer.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806
 timer.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h
 timer.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defines.h
 timer.obj: ../pheripherals.h
+timer.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/IQmathLib.h
+timer.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/limits.h
 
 ../timer.c: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/DSP28x_Project.h: 
@@ -63,3 +65,5 @@ G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_GlobalPro
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defines.h: 
 ../pheripherals.h: 
+G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/IQmathLib.h: 
+G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/limits.h: 

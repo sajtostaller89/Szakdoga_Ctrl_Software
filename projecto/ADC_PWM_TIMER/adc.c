@@ -19,13 +19,36 @@
 #include "DSP28x_Project.h"     // Device Headerfile and Examples Include File
 #include "F2806x_EPwm_defines.h"
 #include "pheripherals.h"
+#include "math.h"
 
-
+// Interrupt variables
 Uint16 ConversionCount;
-Uint16 Voltage0[1000];
-Uint16 Voltage1[1000];
-float32 value0 = 0.0;
-float32 value1 = 0.0;
+_iq Voltage0[100];
+_iq Voltage1[100];
+_iq value0 = 0.0;
+_iq value1 = 0.0;
+
+// Resolver measurement variables
+int i,j,lowest0,lowest1, highest0, highest1 = 0;
+float32 Angle00, Angle01, Angle10, Angle11 = 0.0;
+volatile _iq Theta;
+
+// Control loop variables
+float32 integral1, integral2 = 0.0;
+float32 Kp = 2.0, Ki = 5.0, Ts = 0.001;
+float32 angle_error = 0.0;
+float32 speed = 0.0;
+
+
+float32 control_loop(float32 angle_in){
+    angle_error = Theta - angle_in;
+    integral1 += Ts*angle_error*Ki;
+
+    speed = angle_error*Kp + integral1;
+    integral2 = speed*Ts;
+
+    return integral2;
+}
 
 void Adc_Config(){
     EALLOW;
@@ -35,8 +58,10 @@ void Adc_Config(){
 }
 
 void Adc1_Config(){
+//
+//Configuration for the current measurement:
+//
 
-    //Configuration for the current measurement:
     EALLOW;
     AdcRegs.ADCSAMPLEMODE.bit.SIMULEN0  = 1;    // Simultaneous mode for current measurement is set
     AdcRegs.INTSEL1N2.bit.INT1E         = 1;    // Enabled ADCINT1
@@ -97,6 +122,7 @@ void Adc4_Config(){
     EPwm2Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
 }
 
+
 //ADC function call
 __interrupt void adc1_isr(void)
 {
@@ -130,24 +156,28 @@ __interrupt void adc1_isr(void)
     return;
 }
 
-//TODO: create the other interrupts
+//TODO: create the other interrupts, consider if we should do a lot of these stepts here or only set a global and then the control algortihm will do the calculations
 __interrupt void adc2_isr(void)
 {
-    value0 = (float32)AdcResult.ADCRESULT0*3.3/4096;
+    float32 Theta_in = 0.0;
+
+    // Change the digital values back to voltage values, and subtract the common mode offset
+    value0 = (_iq)AdcResult.ADCRESULT0*3.3/4096;
     if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
         value0 = Voltage1[ConversionCount-1];
-    Voltage0[ConversionCount] = value0;             // cosine
+    Voltage0[ConversionCount] = value0-1.65;             // cosine
 
-    value1 = (float32)AdcResult.ADCRESULT1*3.3/4096;
+    value1 = (_iq)AdcResult.ADCRESULT1*3.3/4096;
     if(((value1 > 3.3) || (value1 < 0)) && (ConversionCount > 0))
         value1 = Voltage1[ConversionCount-1];
-    Voltage1[ConversionCount] = value1;
+    Voltage1[ConversionCount] = value1-1.65;
 
 
     // If 100 conversions have been logged for each channel, start over and get the highest and lowest value's indexes
     if(ConversionCount == 99)
     {
-      /*  for(i = 0; i < 99; i++){
+        // Search for the lowest and highest value indexes
+        for(i = 0; i < 99; i++){
             if (Voltage0[i]>Voltage0[lowest0])
                 lowest0 = i;
             if (Voltage0[i]<Voltage0[highest0])
@@ -159,10 +189,16 @@ __interrupt void adc2_isr(void)
             if (Voltage1[i]<Voltage1[highest0])
                 highest0 = i;
         }
-        Angle00 = IQ19atan(Voltage0[lowest0],Voltage1[lowest0]);
-        Angle01 = IQ19atan(Voltage0[highest0],Voltage1[highest0]);
-        Angle10 = IQ19atan(Voltage0[lowest1],Voltage1[lowest1]);
-        Angle11 = IQ19atan(Voltage0[highest1],Voltage1[highest1]);*/
+
+        // First method, calculate four angle values, then average them
+        Angle00 = _IQ19atan2(Voltage0[lowest0],Voltage1[lowest0]);
+        Angle01 = _IQ19atan2(Voltage0[highest0],Voltage1[highest0]);
+        Angle10 = _IQ19atan2(Voltage0[lowest1],Voltage1[lowest1]);
+        Angle11 = _IQ19atan2(Voltage0[highest1],Voltage1[highest1]);
+
+        Theta_in = (Angle00 + Angle01 + Angle10 + Angle11) / 4;
+
+        Theta = control_loop(Theta_in);
 
         ConversionCount = 0;
     }

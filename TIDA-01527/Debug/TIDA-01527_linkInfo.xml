@@ -2,7 +2,7 @@
 <link_info>
    <banner>TMS320C2000 Linker PC v18.1.3.LTS</banner>
    <copyright>Copyright (c) 1996-2017 Texas Instruments Incorporated</copyright>
-   <link_time>0x5bc5eddd</link_time>
+   <link_time>0x5bcef64a</link_time>
    <link_errors>0x0</link_errors>
    <output_file>TIDA-01527.out</output_file>
    <entry_point>

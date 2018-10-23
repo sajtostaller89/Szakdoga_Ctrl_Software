@@ -1,6 +1,9 @@
 #ifndef PERIPHERALS_H_
 #define PERIPHERALS_H_
 
+#define GLOBAL_Q                19 /* range from -4096 to 4095.999 998 093 */
+#include "IQmathLib.h" /* Fixed point Q-numbers based math library */
+
 //ADC
 __interrupt void adc1_isr(void);
 

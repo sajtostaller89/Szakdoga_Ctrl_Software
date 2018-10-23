@@ -2,6 +2,7 @@
 #include "F2806x_EPwm_defines.h"
 #include "pheripherals.h"
 #include "general.h"
+#include "math.h"
 
 
 //Main

@@ -30,5 +30,10 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/ForTheCompiler/FrameWork28069M.cmd</locationURI>
 		</link>
+		<link>
+			<name>Include/IQmath_fpu32.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Include/IQmath_fpu32.lib</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

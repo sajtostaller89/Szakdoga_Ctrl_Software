@@ -39,6 +39,7 @@ ORDERED_OBJS += \
 "./Source/F2806x_SysCtrl.obj" \
 "./Source/F2806x_usDelay.obj" \
 "../28069_RAM_lnk.cmd" \
+"G:/GitHub/Szakdoga_Ctrl_Software/projecto/Include/IQmath_fpu32.lib" \
 "../Source/F2806x_Headers_nonBIOS.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -51,8 +52,10 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include Include/subdir_vars.mk
 -include Source/subdir_vars.mk
 -include subdir_rules.mk
+-include Include/subdir_rules.mk
 -include Source/subdir_rules.mk
 -include objects.mk
 
@@ -163,11 +166,11 @@ BIN_OUTPUTS__QUOTED += \
 
 
 # All Target
-all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+all: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "ADC_PWM_TIMER.out"
 
 # Tool invocations
-ADC_PWM_TIMER.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+ADC_PWM_TIMER.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C2000 Linker'
 	"G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --vcu_support=vcu0 -g --diag_warning=225 --diag_wrap=off --display_error_number -z -m"ADC_PWM_TIMER.map" --stack_size=0x300 --warn_sections -i"G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/lib" -i"G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="ADC_PWM_TIMER_linkInfo.xml" --rom_model -o "ADC_PWM_TIMER.out" $(ORDERED_OBJS)

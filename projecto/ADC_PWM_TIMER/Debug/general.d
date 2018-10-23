@@ -29,6 +29,8 @@ general.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F28
 general.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_GlobalPrototypes.h
 general.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h
 general.obj: ../pheripherals.h
+general.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/IQmathLib.h
+general.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/limits.h
 general.obj: ../general.h
 
 ../general.c: 
@@ -60,4 +62,6 @@ G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Examples.
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_GlobalPrototypes.h: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_DefaultISR.h: 
 ../pheripherals.h: 
+G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/IQmathLib.h: 
+G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/limits.h: 
 ../general.h: 
