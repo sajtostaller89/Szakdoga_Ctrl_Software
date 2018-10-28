@@ -20,6 +20,8 @@ void main(void)
 
     // Init GPIO pins for ePWM1
     InitEPwm1Gpio();
+    InitEPwm2Gpio();
+    InitEPwm3Gpio();
 
     //Init eCAP to catch ePWM
     InitECap1Gpio(); //eCAP1 is on GPIO19
@@ -57,6 +59,8 @@ void main(void)
 
     // Initialize the ePWMs
     EPwm1_Config();
+    EPwm2_Config();
+    EPwm3_Config();
 
     //Initialize the CPUTimers
     InitCpuTimers();

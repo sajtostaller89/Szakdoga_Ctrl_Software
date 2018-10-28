@@ -19,11 +19,13 @@ __interrupt void epwm2_isr(void);
 __interrupt void epwm3_isr(void);
 
 void EPwm1_Config(void);
+void EPwm2_Config(void);
+void EPwm3_Config(void);
 
 // Defines that configure the period for each timer
-#define EPWM1_TIMER_TBPRD  3000  // Period register
-#define EPWM2_TIMER_TBPRD  2000  // Period register
-#define EPWM3_TIMER_TBPRD  2000  // Period register
+#define EPWM1_TIMER_TBPRD  15000  // Period register because fpwm = 1 /2*15000*90 MHz = 3000 Hz
+#define EPWM2_TIMER_TBPRD  15000  // Period register
+#define EPWM3_TIMER_TBPRD  15000  // Period register
 
 //Defines to keep track of which way the timer value is moving (by Mate 2018.09.16.)
 #define EPWM_TIMER_UP   1
