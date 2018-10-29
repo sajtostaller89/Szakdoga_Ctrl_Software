@@ -11,7 +11,7 @@
 #include "pheripherals.h"
 #include "general.h"
 
-__interrupt void epwm1_isr(void)
+__interrupt void epwm4_isr(void)
 {
     // Update the CMPA and CMPB values
     update_compare();
@@ -24,7 +24,7 @@ __interrupt void epwm1_isr(void)
     return;
 }
 
-__interrupt void epwm2_isr(void)
+__interrupt void epwm5_isr(void)
 {
     // Update the CMPA and CMPB values
     update_compare();
@@ -37,7 +37,7 @@ __interrupt void epwm2_isr(void)
     return;
 }
 
-__interrupt void epwm3_isr(void)
+__interrupt void epwm6_isr(void)
 {
     // Update the CMPA and CMPB values
     update_compare();
@@ -53,7 +53,7 @@ __interrupt void epwm3_isr(void)
 
 //ePWM
 
-void EPwm1_Config()
+void EPwm4_Config()
 {
     EALLOW;
     SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 0;      //We need to disable the sync first
@@ -61,40 +61,40 @@ void EPwm1_Config()
 
 
     // Setup TBCLK
-    EPwm1Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown
-    EPwm1Regs.TBPRD = EPWM1_TIMER_TBPRD;            // Set timer period
-    EPwm1Regs.TBCTL.bit.PHSEN = TB_DISABLE;         // Disable phase loading
-    EPwm1Regs.TBPHS.half.TBPHS = 0x0000;            // Phase is 0
-    EPwm1Regs.TBCTR = 0x0000;                       // Clear counter
-    EPwm1Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
-    EPwm1Regs.TBCTL.bit.CLKDIV = TB_DIV1;
-    //EPwm1Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-    //EPwm1Regs.TBCTL.bit.SYNCOSEL = TB_CTR_ZERO;     // Sync down-stream module
+    EPwm4Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown
+    EPwm4Regs.TBPRD = EPWM4_TIMER_TBPRD;            // Set timer period
+    EPwm4Regs.TBCTL.bit.PHSEN = TB_DISABLE;         // Disable phase loading
+    EPwm4Regs.TBPHS.half.TBPHS = 0x0000;            // Phase is 0
+    EPwm4Regs.TBCTR = 0x0000;                       // Clear counter
+    EPwm4Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
+    EPwm4Regs.TBCTL.bit.CLKDIV = TB_DIV1;
+    //EPwm4Regs.TBCTL.bit.PRDLD = TB_SHADOW;
+    //EPwm4Regs.TBCTL.bit.SYNCOSEL = TB_CTR_ZERO;     // Sync down-stream module
 
     // Setup shadow register load on ZERO
-    EPwm1Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
-    EPwm1Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
-    EPwm1Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
-    EPwm1Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
+    EPwm4Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
+    EPwm4Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
+    EPwm4Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
+    EPwm4Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
 
 
     // Set Compare values, not using dead-band module
-    EPwm1Regs.CMPA.half.CMPA = EPWM1_TIMER_TBPRD/2;          // Set compare A value used to be 1
-    EPwm1Regs.CMPB = EPWM1_TIMER_TBPRD/2;          // Set Compare B value used to be 1
+    EPwm4Regs.CMPA.half.CMPA = EPWM4_TIMER_TBPRD/2+250;          // Set compare A value used to be 1
+    EPwm4Regs.CMPB = EPWM4_TIMER_TBPRD/2-250;          // Set Compare B value used to be 1
 
 
     // Set actions
-    EPwm1Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
-    EPwm1Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, up count
+    EPwm4Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
+    EPwm4Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, up count
 
-    EPwm1Regs.AQCTLB.bit.CBU = AQ_SET;      // Set PWM1B on Zero
-    EPwm1Regs.AQCTLB.bit.CBD = AQ_CLEAR;    // Clear PWM1B on event B, up count
+    EPwm4Regs.AQCTLB.bit.CBD = AQ_SET;      // Set PWM1B on Zero
+    EPwm4Regs.AQCTLB.bit.CBU = AQ_CLEAR;    // Clear PWM1B on event B, up count
 
 
     // Interrupt where we will change the Compare Values
-    EPwm1Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
-    EPwm1Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
-    EPwm1Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
+    EPwm4Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
+    EPwm4Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
+    EPwm4Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
 
 
     EALLOW;
@@ -102,7 +102,7 @@ void EPwm1_Config()
     EDIS;
 }
 
-void EPwm2_Config()
+void EPwm5_Config()
 {
     EALLOW;
     SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 0;      //We need to disable the sync first
@@ -110,40 +110,40 @@ void EPwm2_Config()
 
 
     // Setup TBCLK
-    EPwm2Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown
-    EPwm2Regs.TBPRD = EPWM2_TIMER_TBPRD;            // Set timer period
-    EPwm2Regs.TBCTL.bit.PHSEN = TB_ENABLE;         // Disable phase loading
-    EPwm2Regs.TBPHS.half.TBPHS = 10000;            // Phase is 120 deg = 360 * 10000/30000
-    EPwm2Regs.TBCTR = 0x0000;                       // Clear counter
-    EPwm2Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
-    EPwm2Regs.TBCTL.bit.CLKDIV = TB_DIV1;
-    EPwm2Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-    EPwm2Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;     // Sync down-stream module
+    EPwm5Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown
+    EPwm5Regs.TBPRD = EPWM5_TIMER_TBPRD;            // Set timer period
+    EPwm5Regs.TBCTL.bit.PHSEN = TB_ENABLE;         // Disable phase loading
+    EPwm5Regs.TBPHS.half.TBPHS = 10000;            // Phase is 120 deg = 360 * 10000/30000
+    EPwm5Regs.TBCTR = 0x0000;                       // Clear counter
+    EPwm5Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
+    EPwm5Regs.TBCTL.bit.CLKDIV = TB_DIV1;
+    EPwm5Regs.TBCTL.bit.PRDLD = TB_SHADOW;
+    EPwm5Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;     // Sync down-stream module
 
     // Setup shadow register load on ZERO
-    EPwm2Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
-    EPwm2Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
-    EPwm2Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
-    EPwm2Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
+    EPwm5Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
+    EPwm5Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
+    EPwm5Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
+    EPwm5Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
 
 
     // Set Compare values, not using dead-band module
-    EPwm2Regs.CMPA.half.CMPA = EPWM2_TIMER_TBPRD/2+500;          // Set compare A value, should be >=1
-    EPwm2Regs.CMPB = EPWM2_TIMER_TBPRD/2-500;          // Set Compare B value, should be >=1 200 is good ie
+    EPwm5Regs.CMPA.half.CMPA = EPWM5_TIMER_TBPRD/2+500;          // Set compare A value, should be >=1
+    EPwm5Regs.CMPB = EPWM5_TIMER_TBPRD/2-500;          // Set Compare B value, should be >=1 200 is good ie
 
 
     // Set actions
-    EPwm2Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
-    EPwm2Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, down count
+    EPwm5Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
+    EPwm5Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, down count
 
-    EPwm2Regs.AQCTLB.bit.CBD = AQ_SET;      // Inverter working principle
-    EPwm2Regs.AQCTLB.bit.CBU = AQ_CLEAR;
+    EPwm5Regs.AQCTLB.bit.CBD = AQ_SET;      // Inverter working principle
+    EPwm5Regs.AQCTLB.bit.CBU = AQ_CLEAR;
 
 
     // Interrupt where we will change the Compare Values
-    EPwm2Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
-    EPwm2Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
-    EPwm2Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
+    EPwm5Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
+    EPwm5Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
+    EPwm5Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
 
 
     EALLOW;
@@ -151,7 +151,7 @@ void EPwm2_Config()
     EDIS;
 }
 
-void EPwm3_Config()
+void EPwm6_Config()
 {
     EALLOW;
     SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 0;      //We need to disable the sync first
@@ -159,40 +159,40 @@ void EPwm3_Config()
 
 
     // Setup TBCLK
-    EPwm3Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown
-    EPwm3Regs.TBPRD = EPWM3_TIMER_TBPRD;            // Set timer period
-    EPwm3Regs.TBCTL.bit.PHSEN = TB_ENABLE;         // Disable phase loading
-    EPwm3Regs.TBPHS.half.TBPHS = 20000;            // Phase is 0
-    EPwm3Regs.TBCTR = 0x0000;                       // Clear counter
-    EPwm3Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
-    EPwm3Regs.TBCTL.bit.CLKDIV = TB_DIV1;
-    EPwm3Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-    EPwm3Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;     // Sync down-stream module
+    EPwm6Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown
+    EPwm6Regs.TBPRD = EPWM6_TIMER_TBPRD;            // Set timer period
+    EPwm6Regs.TBCTL.bit.PHSEN = TB_ENABLE;         // Disable phase loading
+    EPwm6Regs.TBPHS.half.TBPHS = 20000;            // Phase is 0
+    EPwm6Regs.TBCTR = 0x0000;                       // Clear counter
+    EPwm6Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
+    EPwm6Regs.TBCTL.bit.CLKDIV = TB_DIV1;
+    EPwm6Regs.TBCTL.bit.PRDLD = TB_SHADOW;
+    EPwm6Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;     // Sync down-stream module
 
     // Setup shadow register load on ZERO
-    EPwm3Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
-    EPwm3Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
-    EPwm3Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
-    EPwm3Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
+    EPwm6Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
+    EPwm6Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
+    EPwm6Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
+    EPwm6Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
 
 
     // Set Compare values, not using dead-band module
-    EPwm3Regs.CMPA.half.CMPA = EPWM3_TIMER_TBPRD/2;          // Set compare A value used to be 1
-    EPwm3Regs.CMPB = EPWM3_TIMER_TBPRD/2;          // Set Compare B value used to be 1
+    EPwm6Regs.CMPA.half.CMPA = EPWM6_TIMER_TBPRD/2+100;          // Set compare A value used to be 1
+    EPwm6Regs.CMPB = EPWM6_TIMER_TBPRD/2-100;          // Set Compare B value used to be 1
 
 
     // Set actions
-    EPwm3Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
-    EPwm3Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, up count
+    EPwm6Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
+    EPwm6Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, up count
 
-    EPwm3Regs.AQCTLB.bit.CBU = AQ_SET;      // Set PWM1B on Zero
-    EPwm3Regs.AQCTLB.bit.CBD = AQ_CLEAR;    // Clear PWM1B on event B, up count
+    EPwm6Regs.AQCTLB.bit.CBD = AQ_SET;      // Set PWM1B on Zero
+    EPwm6Regs.AQCTLB.bit.CBU = AQ_CLEAR;    // Clear PWM1B on event B, up count
 
 
     // Interrupt where we will change the Compare Values
-    EPwm3Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
-    EPwm3Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
-    EPwm3Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
+    EPwm6Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
+    EPwm6Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
+    EPwm6Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
 
 
     EALLOW;

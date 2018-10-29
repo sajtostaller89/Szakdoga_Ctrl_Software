@@ -14,18 +14,18 @@ void Adc4_Config(void);
 
 
 //ePWM
-__interrupt void epwm1_isr(void);
-__interrupt void epwm2_isr(void);
-__interrupt void epwm3_isr(void);
+__interrupt void epwm4_isr(void);
+__interrupt void epwm5_isr(void);
+__interrupt void epwm6_isr(void);
 
-void EPwm1_Config(void);
-void EPwm2_Config(void);
-void EPwm3_Config(void);
+void EPwm4_Config(void);
+void EPwm5_Config(void);
+void EPwm6_Config(void);
 
 // Defines that configure the period for each timer
-#define EPWM1_TIMER_TBPRD  15000  // Period register because fpwm = 1 /2*15000*90 MHz = 3000 Hz
-#define EPWM2_TIMER_TBPRD  15000  // Period register
-#define EPWM3_TIMER_TBPRD  15000  // Period register
+#define EPWM4_TIMER_TBPRD  15000  // Period register because fpwm = 1 /2*15000*90 MHz = 3000 Hz
+#define EPWM5_TIMER_TBPRD  15000  // Period register
+#define EPWM6_TIMER_TBPRD  15000  // Period register
 
 //Defines to keep track of which way the timer value is moving (by Mate 2018.09.16.)
 #define EPWM_TIMER_UP   1

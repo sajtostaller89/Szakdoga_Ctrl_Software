@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v18.1.3                     
 ******************************************************************************
->> Linked Sun Oct 28 17:32:11 2018
+>> Linked Mon Oct 29 12:07:19 2018
 
 OUTPUT FILE NAME:   <ADC_PWM_TIMER.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 00008e62
@@ -749,14 +749,14 @@ page  address   name
 0     0000814a  _EPWM8_TZINT_ISR                
 1     00006800  _EPwm1Regs                      
 1     0000a224  _EPwm1TimerDirection            
-0     000089a2  _EPwm1_Config                   
 1     00006840  _EPwm2Regs                      
-0     000089e8  _EPwm2_Config                   
 1     00006880  _EPwm3Regs                      
-0     00008a33  _EPwm3_Config                   
 1     000068c0  _EPwm4Regs                      
+0     000089a2  _EPwm4_Config                   
 1     00006900  _EPwm5Regs                      
+0     000089e8  _EPwm5_Config                   
 1     00006940  _EPwm6Regs                      
+0     00008a33  _EPwm6_Config                   
 1     00006980  _EPwm7Regs                      
 1     000069c0  _EPwm8Regs                      
 0     000081d6  _EQEP1_INT_ISR                  
@@ -957,9 +957,9 @@ abs   ffffffff  ___pinit__
 0     00008fc4  _cpu_timer2_isr                 
 0     00008f97  _duty_calc                      
 0     00008c23  _ecap1_isr                      
-0     00008cc5  _epwm1_isr                      
-0     00008cfa  _epwm2_isr                      
-0     00008d2f  _epwm3_isr                      
+0     00008cc5  _epwm4_isr                      
+0     00008cfa  _epwm5_isr                      
+0     00008d2f  _epwm6_isr                      
 0     00009007  _exit                           
 1     0000a003  _highest0                       
 1     0000a005  _highest1                       
@@ -1103,9 +1103,9 @@ page  address   name
 0     0000895c  _IntOsc2Sel                     
 0     00008970  _XtalOscSel                     
 0     0000898c  _ExtOscSel                      
-0     000089a2  _EPwm1_Config                   
-0     000089e8  _EPwm2_Config                   
-0     00008a33  _EPwm3_Config                   
+0     000089a2  _EPwm4_Config                   
+0     000089e8  _EPwm5_Config                   
+0     00008a33  _EPwm6_Config                   
 0     00008a7e  _update_compare                 
 0     00008a7f  _InitEPwm                       
 0     00008a80  _InitEPwmGpio                   
@@ -1125,9 +1125,9 @@ page  address   name
 0     00008bc4  _Adc2_Config                    
 0     00008bf4  _Adc4_Config                    
 0     00008c23  _ecap1_isr                      
-0     00008cc5  _epwm1_isr                      
-0     00008cfa  _epwm2_isr                      
-0     00008d2f  _epwm3_isr                      
+0     00008cc5  _epwm4_isr                      
+0     00008cfa  _epwm5_isr                      
+0     00008d2f  _epwm6_isr                      
 0     00008d64  FS$$DIV                         
 0     00008dec  _InitCpuTimers                  
 0     00008e27  _ConfigCpuTimer                 

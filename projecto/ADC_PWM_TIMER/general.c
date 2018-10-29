@@ -18,9 +18,9 @@ void ConfigPieVectTable(){
 
     PieVectTable.ADCINT1 = &adc1_isr;       //First the ADC1
 
-    PieVectTable.EPWM1_INT = &epwm1_isr;    //Second the ePWM1
-    PieVectTable.EPWM2_INT = &epwm2_isr;    //Second the ePWM1
-    PieVectTable.EPWM3_INT = &epwm3_isr;    //Second the ePWM1
+    PieVectTable.EPWM1_INT = &epwm4_isr;    //Second the ePWM1
+    PieVectTable.EPWM2_INT = &epwm5_isr;    //Second the ePWM1
+    PieVectTable.EPWM3_INT = &epwm6_isr;    //Second the ePWM1
 
     PieVectTable.TINT0 = &cpu_timer0_isr;   //Third the CPU Timers (by Mate 2018.09.16.)
     PieVectTable.TINT1 = &cpu_timer1_isr;

@@ -19,9 +19,9 @@ void main(void)
     InitAdcAio();   //not necessary maybe
 
     // Init GPIO pins for ePWM1
-    InitEPwm1Gpio();
-    InitEPwm2Gpio();
-    InitEPwm3Gpio();
+    InitEPwm4Gpio();
+    InitEPwm5Gpio();
+    InitEPwm6Gpio();
 
     //Init eCAP to catch ePWM
     InitECap1Gpio(); //eCAP1 is on GPIO19
@@ -58,9 +58,9 @@ void main(void)
     Adc4_Config();      // Voltage measurement
 
     // Initialize the ePWMs
-    EPwm1_Config();
-    EPwm2_Config();
-    EPwm3_Config();
+    EPwm4_Config();
+    EPwm5_Config();
+    EPwm6_Config();
 
     //Initialize the CPUTimers
     InitCpuTimers();
