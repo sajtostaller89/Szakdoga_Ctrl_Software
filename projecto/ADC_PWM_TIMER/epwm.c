@@ -68,8 +68,8 @@ void EPwm4_Config()
     EPwm4Regs.TBCTR = 0x0000;                       // Clear counter
     EPwm4Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
     EPwm4Regs.TBCTL.bit.CLKDIV = TB_DIV1;
-    //EPwm4Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-    //EPwm4Regs.TBCTL.bit.SYNCOSEL = TB_CTR_ZERO;     // Sync down-stream module
+    EPwm4Regs.TBCTL.bit.PRDLD = TB_SHADOW;
+    EPwm4Regs.TBCTL.bit.SYNCOSEL = TB_CTR_ZERO;     // Sync down-stream module
 
     // Setup shadow register load on ZERO
     EPwm4Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
@@ -113,7 +113,7 @@ void EPwm5_Config()
     EPwm5Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown
     EPwm5Regs.TBPRD = EPWM5_TIMER_TBPRD;            // Set timer period
     EPwm5Regs.TBCTL.bit.PHSEN = TB_ENABLE;         // Disable phase loading
-    EPwm5Regs.TBPHS.half.TBPHS = 10000;            // Phase is 120 deg = 360 * 10000/30000
+    EPwm5Regs.TBPHS.half.TBPHS = 0x2710; //10000;            // Phase is 120 deg = 360 * 10000/30000
     EPwm5Regs.TBCTR = 0x0000;                       // Clear counter
     EPwm5Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
     EPwm5Regs.TBCTL.bit.CLKDIV = TB_DIV1;
