@@ -52,6 +52,101 @@ __interrupt void epwm6_isr(void)
 
 
 //ePWM
+void EPwm1_Config()
+{
+    EALLOW;
+    SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 0;      //We need to disable the sync first
+    EDIS;
+
+    // Setup TBCLK
+    EPwm1Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown, we trigger on both PRD and ZERO
+    EPwm1Regs.TBPRD = EPWM1_TIMER_TBPRD;            // Set timer period
+    EPwm1Regs.TBCTL.bit.PHSEN = TB_DISABLE;         // Disable phase loading
+    EPwm1Regs.TBPHS.half.TBPHS = 0x0000;            // Phase is 0
+    EPwm1Regs.TBCTR = 0x0000;                       // Clear counter
+    EPwm1Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
+    EPwm1Regs.TBCTL.bit.CLKDIV = TB_DIV1;
+    EPwm1Regs.TBCTL.bit.PRDLD = TB_SHADOW;
+
+    // Setup shadow register load on ZERO
+    EPwm1Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
+    EPwm1Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
+    EPwm1Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
+    EPwm1Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
+
+    // Assumes ePWM1 clock is already enabled in InitSysCtrl(); ePWM1 triggers current measurement
+    EPwm1Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
+    EPwm1Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD TODO:or this should be cmpa?
+    EPwm1Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
+
+    EALLOW;
+    SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      //Then enable the sync
+    EDIS;
+}
+
+void EPwm2_Config()
+{
+    EALLOW;
+    SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 0;      //We need to disable the sync first
+    EDIS;
+
+    // Setup TBCLK
+    EPwm2Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown, we trigger on both PRD and ZERO
+    EPwm2Regs.TBPRD = EPWM2_TIMER_TBPRD;            // Set timer period
+    EPwm2Regs.TBCTL.bit.PHSEN = TB_DISABLE;         // Disable phase loading
+    EPwm2Regs.TBPHS.half.TBPHS = 0x0000;            // Phase is 0
+    EPwm2Regs.TBCTR = 0x0000;                       // Clear counter
+    EPwm2Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
+    EPwm2Regs.TBCTL.bit.CLKDIV = TB_DIV1;
+    EPwm2Regs.TBCTL.bit.PRDLD = TB_SHADOW;
+
+    // Setup shadow register load on ZERO
+    EPwm2Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
+    EPwm2Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
+    EPwm2Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
+    EPwm2Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
+
+    // Assumes ePWM2 clock is already enabled in InitSysCtrl(); ePWM2 triggers resolver measurement
+    EPwm2Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
+    EPwm2Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD
+    EPwm2Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
+
+    EALLOW;
+    SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      //Then enable the sync
+    EDIS;
+}
+
+void EPwm3_Config()
+{
+    EALLOW;
+    SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 0;      //We need to disable the sync first
+    EDIS;
+
+    // Setup TBCLK
+    EPwm3Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count updown, we trigger on both PRD and ZERO
+    EPwm3Regs.TBPRD = EPWM3_TIMER_TBPRD;            // Set timer period
+    EPwm3Regs.TBCTL.bit.PHSEN = TB_DISABLE;         // Disable phase loading
+    EPwm3Regs.TBPHS.half.TBPHS = 0x0000;            // Phase is 0
+    EPwm3Regs.TBCTR = 0x0000;                       // Clear counter
+    EPwm3Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;        // Clock ratio to SYSCLKOUT
+    EPwm3Regs.TBCTL.bit.CLKDIV = TB_DIV1;
+    EPwm3Regs.TBCTL.bit.PRDLD = TB_SHADOW;
+
+    // Setup shadow register load on ZERO
+    EPwm3Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
+    EPwm3Regs.CMPCTL.bit.SHDWBMODE = CC_SHADOW;
+    EPwm3Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
+    EPwm3Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
+
+    // Assumes ePWM3 clock is already enabled in InitSysCtrl(); ePWM3 triggers voltage measurement
+    EPwm2Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
+    EPwm2Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD
+    EPwm2Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
+
+    EALLOW;
+    SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      //Then enable the sync
+    EDIS;
+}
 
 void EPwm4_Config()
 {

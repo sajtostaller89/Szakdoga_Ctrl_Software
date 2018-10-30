@@ -58,10 +58,7 @@ void Adc_Config(){
 }
 
 void Adc1_Config(){
-//
-//Configuration for the current measurement:
-//
-
+    //Configuration for the current measurement:
     EALLOW;
     AdcRegs.ADCSAMPLEMODE.bit.SIMULEN0  = 1;    // Simultaneous mode for current measurement is set
     AdcRegs.INTSEL1N2.bit.INT1E         = 1;    // Enabled ADCINT1
@@ -72,18 +69,10 @@ void Adc1_Config(){
     AdcRegs.ADCSOC0CTL.bit.ACQPS        = 6;    // set SOC0 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     AdcRegs.ADCSOC1CTL.bit.ACQPS        = 6;    // set SOC1 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     EDIS;
-
-    // Assumes ePWM1 clock is already enabled in InitSysCtrl(); ePWM1 triggers current measurement
-    EPwm1Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
-    EPwm1Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD TODO:or this should be cmpa?
-    EPwm1Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
 }
 
 void Adc2_Config(){
-//
-//Configuration for the resolver signal measurement:
-//
-
+    //Configuration for the resolver signal measurement:
     EALLOW;
     AdcRegs.ADCSAMPLEMODE.bit.SIMULEN2  = 1;    // SOC2 & SOC3 sampled at the same time
     AdcRegs.INTSEL1N2.bit.INT2E         = 1;    // Enabled ADCINT2
@@ -94,18 +83,10 @@ void Adc2_Config(){
     AdcRegs.ADCSOC2CTL.bit.ACQPS        = 6;    // set SOC2 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     AdcRegs.ADCSOC3CTL.bit.ACQPS        = 6;    // set SOC3 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     EDIS;
-
-    // Assumes ePWM2 clock is already enabled in InitSysCtrl(); ePWM2 triggers resolver measurement
-    EPwm2Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
-    EPwm2Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD
-    EPwm2Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
 }
 
 void Adc4_Config(){
-//
-//Configuration for the voltage measurement:
-//
-
+    //Configuration for the voltage measurement:
     EALLOW;
     AdcRegs.INTSEL3N4.bit.INT3E         = 1;    // Enabled ADCINT3
     AdcRegs.INTSEL3N4.bit.INT3CONT      = 0;    // Disable ADCINT3 Continuous mode
@@ -115,11 +96,6 @@ void Adc4_Config(){
     AdcRegs.ADCSOC4CTL.bit.TRIGSEL      = 9;    // SOC4 triggered by ePWM3.ADCSOCA
     AdcRegs.ADCSOC4CTL.bit.ACQPS        = 6;    // set SOC4 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     EDIS;
-
-    // Assumes ePWM2 clock is already enabled in InitSysCtrl(); ePWM2 triggers resolver measurement
-    EPwm2Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
-    EPwm2Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD
-    EPwm2Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
 }
 
 
