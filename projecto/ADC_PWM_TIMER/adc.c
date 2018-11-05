@@ -23,7 +23,7 @@
 
 // Interrupt variables
 Uint16 ConversionCount;
-_iq Voltage0[100];
+float32 Voltage0[100];
 _iq Voltage1[100];
 _iq value0 = 0.0;
 _iq value1 = 0.0;
@@ -38,7 +38,7 @@ float32 integral1, integral2 = 0.0;
 float32 Kp = 2.0, Ki = 5.0, Ts = 0.001;
 float32 angle_error = 0.0;
 float32 speed = 0.0;
-
+float32 Theta_in = 0.0;
 
 float32 control_loop(float32 angle_in){
     angle_error = Theta - angle_in;
@@ -65,7 +65,7 @@ void Adc1_Config(){
     AdcRegs.INTSEL1N2.bit.INT1CONT      = 0;    // Disable ADCINT1 Continuous mode
     AdcRegs.INTSEL1N2.bit.INT1SEL       = 1;    // setup EOC1 to trigger ADCINT1 to fire, this way an interrupt occurs when both samples are ready
     AdcRegs.ADCSOC0CTL.bit.CHSEL        = 1;    // In simultaneous mode we only need to set SOC0 channel select to ADCINA1 and ADCINB1
-    AdcRegs.ADCSOC0CTL.bit.TRIGSEL      = 5;    // ADCTRIG5 = ePWM1.ADCSOCA, thats what we will set up
+    AdcRegs.ADCSOC0CTL.bit.TRIGSEL      = 11;    // ADCTRIG11 = ePWM4.ADCSOCA, thats what we will set up
     AdcRegs.ADCSOC0CTL.bit.ACQPS        = 6;    // set SOC0 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     AdcRegs.ADCSOC1CTL.bit.ACQPS        = 6;    // set SOC1 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     EDIS;
@@ -93,7 +93,7 @@ void Adc4_Config(){
     AdcRegs.INTSEL3N4.bit.INT3SEL       = 4;    // setup EOC4 to trigger ADCINT3 to fire, this way an interrupt occurs when both samples are ready
     AdcRegs.ADCSOC4CTL.bit.CHSEL        = 4;    // SOC4 TO A4
     AdcRegs.ADCSOC4CTL.bit.CHSEL        = 4;    // set SOC4 channel select to ADCINA4
-    AdcRegs.ADCSOC4CTL.bit.TRIGSEL      = 9;    // SOC4 triggered by ePWM3.ADCSOCA
+    AdcRegs.ADCSOC4CTL.bit.TRIGSEL      = 11;   // SOC4 triggered by ePWM4.ADCSOCA
     AdcRegs.ADCSOC4CTL.bit.ACQPS        = 6;    // set SOC4 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     EDIS;
 }
@@ -102,6 +102,8 @@ void Adc4_Config(){
 //ADC function call
 __interrupt void adc1_isr(void)
 {
+
+    /*
     value0 = (float32)AdcResult.ADCRESULT0*3.3/4096;
     if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
         value0 = Voltage1[ConversionCount-1];
@@ -128,22 +130,20 @@ __interrupt void adc1_isr(void)
     AdcRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
 
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;   // Acknowledge interrupt to PIE
-
+*/
     return;
 }
 
 //TODO: create the other interrupts, consider if we should do a lot of these stepts here or only set a global and then the control algortihm will do the calculations
 __interrupt void adc2_isr(void)
 {
-    float32 Theta_in = 0.0;
-
     // Change the digital values back to voltage values, and subtract the common mode offset
-    value0 = (_iq)AdcResult.ADCRESULT0*3.3/4096;
+    value0 = (float32)AdcResult.ADCRESULT2*3.3/4096;
     if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
         value0 = Voltage1[ConversionCount-1];
     Voltage0[ConversionCount] = value0-1.65;             // cosine
 
-    value1 = (_iq)AdcResult.ADCRESULT1*3.3/4096;
+    value1 = (_iq)AdcResult.ADCRESULT3*3.3/4096;
     if(((value1 > 3.3) || (value1 < 0)) && (ConversionCount > 0))
         value1 = Voltage1[ConversionCount-1];
     Voltage1[ConversionCount] = value1-1.65;
@@ -168,7 +168,7 @@ __interrupt void adc2_isr(void)
 
         // First method, calculate four angle values, then average them
         Angle00 = _IQ19atan2(Voltage0[lowest0],Voltage1[lowest0]);
-        Angle01 = _IQ19atan2(Voltage0[highest0],Voltage1[highest0]);
+        Angle01 = _IQ19atan2(Voltage0[highest0],0.866025);
         Angle10 = _IQ19atan2(Voltage0[lowest1],Voltage1[lowest1]);
         Angle11 = _IQ19atan2(Voltage0[highest1],Voltage1[highest1]);
 

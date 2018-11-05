@@ -28,9 +28,7 @@ void EPwm5_Config(void);
 void EPwm6_Config(void);
 
 // Defines that configure the period for each timer
-#define EPWM1_TIMER_TBPRD  15000  // Period register because fpwm = 1 /2*15000*90 MHz = 3000 Hz
 #define EPWM2_TIMER_TBPRD  900    // Period register for the 100 kHz sample time
-#define EPWM3_TIMER_TBPRD  15000  // Period register
 
 #define EPWM4_TIMER_TBPRD  15000  // Period register because fpwm = 1 /2*15000*90 MHz = 3000 Hz
 #define EPWM5_TIMER_TBPRD  15000  // Period register

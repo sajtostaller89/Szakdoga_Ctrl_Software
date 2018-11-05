@@ -57,13 +57,12 @@ void main(void)
     Adc2_Config();      // Resolver measurement
     Adc4_Config();      // Voltage measurement
 
-    // Initialize the ePWMs for the ADC triggering
-    EPwm1_Config();
-    EPwm2_Config();
-    EPwm3_Config();     // Triggers adc4
+    // Initialize an ePWM for the ADC2 triggering
+    EPwm2_Config();     // Triggers adc2
+
 
     // Initialize the ePWMs for the phases
-    EPwm4_Config();
+    EPwm4_Config();     // Triggers adc1 and adc4?
     EPwm5_Config();
     EPwm6_Config();
 

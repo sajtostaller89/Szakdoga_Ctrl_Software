@@ -17,6 +17,7 @@ void ConfigPieVectTable(){
     EALLOW;// This is needed to write to EALLOW protected registers
 
     PieVectTable.ADCINT1 = &adc1_isr;       //First the ADC1
+    PieVectTable.ADCINT2 = &adc2_isr;       //First the ADC2
 
     PieVectTable.EPWM1_INT = &epwm4_isr;    //Second the ePWM1
     PieVectTable.EPWM2_INT = &epwm5_isr;    //Second the ePWM1
