@@ -123,7 +123,7 @@ void EPwm4_Config()
     //EPwm4Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
     //EPwm4Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
 
-    // Assumes ePWM3 clock is already enabled in InitSysCtrl(); ePWM3 triggers current measurement
+    // ePWM4 triggers current measurement
     EPwm4Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
     EPwm4Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD TODO:or this should be cmpa?
     EPwm4Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event

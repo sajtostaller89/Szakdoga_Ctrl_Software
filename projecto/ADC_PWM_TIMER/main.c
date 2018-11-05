@@ -69,9 +69,9 @@ void main(void)
     //Initialize the CPUTimers
     InitCpuTimers();
     // Configure CPU-Timer 0, 1, and 2 to interrupt every second: 80MHz CPU Freq, 1 second Period (in uSeconds)
-    ConfigCpuTimer(&CpuTimer0, 80, 110); //Interrupt 0.11ms
-    ConfigCpuTimer(&CpuTimer1, 80, 200); //Interrupt 0.2ms
-    ConfigCpuTimer(&CpuTimer2, 80, 200); //Interrupt 0.2ms
+    //ConfigCpuTimer(&CpuTimer0, 80, 110); //Interrupt 0.11ms
+    //ConfigCpuTimer(&CpuTimer1, 80, 200); //Interrupt 0.2ms
+    //ConfigCpuTimer(&CpuTimer2, 80, 200); //Interrupt 0.2ms
 
     // Initialize the eCAP
     // InitPeripherals();

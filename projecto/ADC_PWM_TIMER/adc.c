@@ -6,13 +6,13 @@
  *
  *
  * Current measurement:
- * ADCINA1 ->SOC0 ->PIN29, ADCINB1 ->SOC1 ->PIN23,
+ * ADCINA1 ->SOC0 ->PIN29, ADCINB1 ->SOC1 ->PIN24,
  *
  * Resolver measurement:
- * ADCINA2 ->SOC2 ->PIN17, ADCINB2 ->SOC3 ->PIN24,
+ * ADCINA2 ->SOC2 ->PIN25, ADCINB2 ->SOC3 ->PIN26,
  *
  * Voltage measurement:
- * ADCINA4 ->SOC4 ->PIN16:
+ * ADCINA4 ->SOC4 ->PIN69:
  *
  */
 
@@ -25,7 +25,7 @@
 Uint16 ConversionCount;
 float32 Voltage0[100];
 _iq Voltage1[100];
-_iq value0 = 0.0;
+float32 value0 = 1.0;
 _iq value1 = 0.0;
 
 // Resolver measurement variables
@@ -125,12 +125,12 @@ __interrupt void adc1_isr(void)
         ConversionCount++;
     }
 
-
+*/
     // Clear ADCINT1 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
 
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;   // Acknowledge interrupt to PIE
-*/
+
     return;
 }
 
@@ -185,10 +185,21 @@ __interrupt void adc2_isr(void)
 
 
     // Clear ADCINT1 flag reinitialize for next SOC
-    AdcRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
+    AdcRegs.ADCINTFLGCLR.bit.ADCINT2 = 1;
 
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;   // Acknowledge interrupt to PIE
 
     return;
 }
+
+__interrupt void adc3_isr(void)
+{
+    // Clear ADCINT1 flag reinitialize for next SOC
+    AdcRegs.ADCINTFLGCLR.bit.ADCINT3 = 1;
+
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP10;   // Acknowledge interrupt to PIE
+
+    return;
+}
+
 

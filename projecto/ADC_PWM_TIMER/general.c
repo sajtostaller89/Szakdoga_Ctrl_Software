@@ -18,6 +18,7 @@ void ConfigPieVectTable(){
 
     PieVectTable.ADCINT1 = &adc1_isr;       //First the ADC1
     PieVectTable.ADCINT2 = &adc2_isr;       //First the ADC2
+    PieVectTable.ADCINT3 = &adc3_isr;       //First the ADC3
 
     PieVectTable.EPWM1_INT = &epwm4_isr;    //Second the ePWM1
     PieVectTable.EPWM2_INT = &epwm5_isr;    //Second the ePWM1
@@ -35,7 +36,8 @@ void ConfigPieVectTable(){
 
 void ConfigEnableInterrupts(){
     // Enable CPU INT1 which is connected to ADC1 INT:
-     IER |= M_INT1;                      // Enable CPU Interrupt 1
+    IER |= M_INT1;                       // Enable CPU Interrupt 1
+    IER |= M_INT10;                      // Enable CPU Interrupt 10 for adcint3
 
      // Enable CPU INT3 which is connected to EPWM1-3 INT:
      IER |= M_INT3;                      // Enable CPU Interrupt 3
@@ -52,6 +54,7 @@ void ConfigEnableInterrupts(){
 
      // Enable ADC INTn in the PIE: Group 1 interrupt 1
      PieCtrlRegs.PIEIER1.bit.INTx1 = 1;
+     PieCtrlRegs.PIEIER1.bit.INTx2 = 1;
 
      // Enable EPWM INTn in the PIE: Group 3 interrupt 1-3
      PieCtrlRegs.PIEIER3.bit.INTx1 = 1;

@@ -7,7 +7,7 @@
 //ADC
 __interrupt void adc1_isr(void);
 __interrupt void adc2_isr(void);
-__interrupt void adc4_isr(void);
+__interrupt void adc3_isr(void);
 
 void Adc_Config(void);
 void Adc1_Config(void);
