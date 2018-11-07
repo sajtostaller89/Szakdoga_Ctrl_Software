@@ -24,29 +24,33 @@
 // Interrupt variables
 Uint16 ConversionCount;
 float32 Voltage0[100];
-_iq Voltage1[100];
+float32 Voltage1[100];
 float32 value0 = 1.0;
-_iq value1 = 0.0;
+float32 value1 = 0.0;
 
 // Resolver measurement variables
 int i,j,lowest0,lowest1, highest0, highest1 = 0;
 float32 Angle00, Angle01, Angle10, Angle11 = 0.0;
-volatile _iq Theta;
+volatile float32 Theta = 0.0, Theta_out = 0.0;
 
 // Control loop variables
-float32 integral1, integral2 = 0.0;
-float32 Kp = 2.0, Ki = 5.0, Ts = 0.001;
+float32 integral1 = 0.0, integral2 = 0.0;
+float32 Kp = 50.0, Ki = 100.0, Ts = 0.001; //1kHz
 float32 angle_error = 0.0;
 float32 speed = 0.0;
 float32 Theta_in = 0.0;
 
 float32 control_loop(float32 angle_in){
-    angle_error = Theta - angle_in;
+    angle_error = angle_in-Theta;
     integral1 += Ts*angle_error*Ki;
-
+    if (integral1 > 320) {
+        integral1 = 320;
+    }
     speed = angle_error*Kp + integral1;
-    integral2 = speed*Ts;
-
+    integral2 += speed*Ts;
+    if (integral2 > 6.2832) {
+        integral2 = 6.2832;
+    }
     return integral2;
 }
 
@@ -140,41 +144,41 @@ __interrupt void adc2_isr(void)
     // Change the digital values back to voltage values, and subtract the common mode offset
     value0 = (float32)AdcResult.ADCRESULT2*3.3/4096;
     if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
-        value0 = Voltage1[ConversionCount-1];
+        value0 = Voltage1[ConversionCount-1]+1.65;
     Voltage0[ConversionCount] = value0-1.65;             // cosine
 
-    value1 = (_iq)AdcResult.ADCRESULT3*3.3/4096;
+    value1 = (float32)AdcResult.ADCRESULT3*3.3/4096-1.65;       //Consider which way to use
     if(((value1 > 3.3) || (value1 < 0)) && (ConversionCount > 0))
         value1 = Voltage1[ConversionCount-1];
-    Voltage1[ConversionCount] = value1-1.65;
-
+    Voltage1[ConversionCount] = value1;
 
     // If 100 conversions have been logged for each channel, start over and get the highest and lowest value's indexes
     if(ConversionCount == 99)
     {
         // Search for the lowest and highest value indexes
         for(i = 0; i < 99; i++){
-            if (Voltage0[i]>Voltage0[lowest0])
+            if (Voltage0[i]<Voltage0[lowest0])
                 lowest0 = i;
-            if (Voltage0[i]<Voltage0[highest0])
+            if (Voltage0[i]>Voltage0[highest0])
                 highest0 = i;
         }
         for(i = 0; i < 99; i++){
-            if (Voltage1[i]>Voltage1[lowest0])
-                lowest0 = i;
-            if (Voltage1[i]<Voltage1[highest0])
-                highest0 = i;
+            if (Voltage1[i]<Voltage1[lowest1])
+                lowest1 = i;
+            if (Voltage1[i]>Voltage1[highest1])
+                highest1 = i;
         }
 
         // First method, calculate four angle values, then average them
-        Angle00 = _IQ19atan2(Voltage0[lowest0],Voltage1[lowest0]);
-        Angle01 = _IQ19atan2(Voltage0[highest0],0.866025);
-        Angle10 = _IQ19atan2(Voltage0[lowest1],Voltage1[lowest1]);
-        Angle11 = _IQ19atan2(Voltage0[highest1],Voltage1[highest1]);
+        Angle00 = atan(Voltage0[lowest0]/Voltage1[lowest0]);  //amuyg ugyan az csak voltage1 a tomb
+        Angle01 = atan(Voltage0[highest0]/Voltage1[highest0]);
+        Angle10 = atan(Voltage0[lowest1]/Voltage1[lowest1]);
+        Angle11 = atan(Voltage0[highest1]/Voltage1[highest1]);
 
         Theta_in = (Angle00 + Angle01 + Angle10 + Angle11) / 4;
+        //Theta_in = (Angle00 + Angle01) / 2;
 
-        Theta = control_loop(Theta_in);
+        Theta_out = control_loop(Theta_in);
 
         ConversionCount = 0;
     }
@@ -183,7 +187,7 @@ __interrupt void adc2_isr(void)
         ConversionCount++;
     }
 
-
+    Theta = Theta_out;
     // Clear ADCINT1 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT2 = 1;
 
