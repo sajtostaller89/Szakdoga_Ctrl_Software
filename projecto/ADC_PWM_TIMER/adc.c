@@ -21,17 +21,12 @@
 #include "pheripherals.h"
 #include "math.h"
 
-// Interrupt variables
-Uint16 ConversionCount;
-float32 Voltage0[100];
-float32 Voltage1[100];
-float32 value0 = 1.0;
-float32 value1 = 0.0;
 
 // Resolver measurement variables
-int i,j,lowest0,lowest1, highest0, highest1 = 0;
-float32 Angle00, Angle01, Angle10, Angle11 = 0.0;
+int i = 0,j = 0,lowest0 = 0,lowest1 = 0, highest0 = 0, highest1 = 0;
+float32 Angle00 = 0.0, Angle01 = 0.0, Angle10 = 0.0, Angle11 = 0.0;
 volatile float32 Theta = 0.0, Theta_out = 0.0;
+Uint16 cc_max = 99;
 
 // Control loop variables
 float32 integral1 = 0.0, integral2 = 0.0;
@@ -40,9 +35,19 @@ float32 angle_error = 0.0;
 float32 speed = 0.0;
 float32 Theta_in = 0.0;
 
+// Interrupt variables
+Uint16 ConversionCount;
+float32 Voltage0[100];
+float32 Voltage1[100];
+float32 value0 = 1.0;
+float32 value1 = 1.0;
+
+
+Uint16 temp0, temp1;
+
 float32 control_loop(float32 angle_in){
     angle_error = angle_in-Theta;
-    integral1 += Ts*angle_error*Ki;
+    integral1 += Ts*angle_error*Ki;     //Nem ennek kéne lennie a speednek?
     if (integral1 > 320) {
         integral1 = 320;
     }
@@ -130,6 +135,12 @@ __interrupt void adc1_isr(void)
     }
 
 */
+    /*-Field_Oriented_Motor_Control_rtZInput.ia = 0.0f;
+    Field_Oriented_Motor_Control_rtZInput.ib = 0.0f;
+    Field_Oriented_Motor_Control_rtZInput.ic = 0.0f;
+    Field_Oriented_Motor_Control_rtZInput.angle = (real_32T)Theta;
+    Field_Oriented_Motor_Control_rtZInput.speed = (real_32T)speed;
+    Field_Oriented_Motor_Control_step();*/
     // Clear ADCINT1 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
 
@@ -141,28 +152,32 @@ __interrupt void adc1_isr(void)
 //TODO: create the other interrupts, consider if we should do a lot of these stepts here or only set a global and then the control algortihm will do the calculations
 __interrupt void adc2_isr(void)
 {
-    // Change the digital values back to voltage values, and subtract the common mode offset
-    value0 = (float32)AdcResult.ADCRESULT2*3.3/4096;
-    if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
-        value0 = Voltage1[ConversionCount-1]+1.65;
-    Voltage0[ConversionCount] = value0-1.65;             // cosine
 
-    value1 = (float32)AdcResult.ADCRESULT3*3.3/4096-1.65;       //Consider which way to use
+    temp0 = AdcResult.ADCRESULT2;
+    temp1 = AdcResult.ADCRESULT3;
+
+    // Change the digital values back to voltage values, and subtract the common mode offset
+    value0 = (float32)temp0*3.3/4096;
+    if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
+        value0 = Voltage0[ConversionCount-1]+1.65;
+    Voltage0[ConversionCount] = value0-1.65;             // sine
+
+    value1 = (float32)temp1*3.3/4096;
     if(((value1 > 3.3) || (value1 < 0)) && (ConversionCount > 0))
-        value1 = Voltage1[ConversionCount-1];
-    Voltage1[ConversionCount] = value1;
+        value1 = Voltage1[ConversionCount-1]+1.65;
+    Voltage1[ConversionCount] = value1-1.65;             // cosine
 
     // If 100 conversions have been logged for each channel, start over and get the highest and lowest value's indexes
-    if(ConversionCount == 99)
+    if(ConversionCount == cc_max)
     {
         // Search for the lowest and highest value indexes
-        for(i = 0; i < 99; i++){
+        for(i = 0; i < cc_max; i++){
             if (Voltage0[i]<Voltage0[lowest0])
                 lowest0 = i;
             if (Voltage0[i]>Voltage0[highest0])
                 highest0 = i;
         }
-        for(i = 0; i < 99; i++){
+        for(i = 0; i < cc_max; i++){
             if (Voltage1[i]<Voltage1[lowest1])
                 lowest1 = i;
             if (Voltage1[i]>Voltage1[highest1])
@@ -170,13 +185,13 @@ __interrupt void adc2_isr(void)
         }
 
         // First method, calculate four angle values, then average them
-        Angle00 = atan(Voltage0[lowest0]/Voltage1[lowest0]);  //amuyg ugyan az csak voltage1 a tomb
-        Angle01 = atan(Voltage0[highest0]/Voltage1[highest0]);
+        Angle00 = atan(Voltage0[lowest0]/Voltage1[lowest1]);  //amuyg ugyan az csak voltage1 a tomb
+        Angle01 = atan(Voltage0[highest0]/Voltage1[highest1]);
         Angle10 = atan(Voltage0[lowest1]/Voltage1[lowest1]);
         Angle11 = atan(Voltage0[highest1]/Voltage1[highest1]);
 
-        Theta_in = (Angle00 + Angle01 + Angle10 + Angle11) / 4;
-        //Theta_in = (Angle00 + Angle01) / 2;
+        //Theta_in = (Angle00 + Angle01 + Angle10 + Angle11) / 4;
+        Theta_in = (Angle00 + Angle01) / 2;
 
         Theta_out = control_loop(Theta_in);
 
@@ -188,7 +203,7 @@ __interrupt void adc2_isr(void)
     }
 
     Theta = Theta_out;
-    // Clear ADCINT1 flag reinitialize for next SOC
+    // Clear ADCINT2 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT2 = 1;
 
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;   // Acknowledge interrupt to PIE
@@ -198,7 +213,9 @@ __interrupt void adc2_isr(void)
 
 __interrupt void adc3_isr(void)
 {
-    // Clear ADCINT1 flag reinitialize for next SOC
+
+
+    // Clear ADCINT3 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT3 = 1;
 
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP10;   // Acknowledge interrupt to PIE
