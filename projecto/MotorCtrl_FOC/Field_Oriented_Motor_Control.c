@@ -20,8 +20,8 @@
  * Validation result: Not run
  */
 
-#include <MotorCtrl_FOC/Field_Oriented_Motor_Control.h>
-#include <MotorCtrl_FOC/Field_Oriented_Motor_Control_private.h>
+#include "Field_Oriented_Motor_Control.h"
+#include "Field_Oriented_Motor_Control_private.h"
 
 const Output Field_Oriented_Motor_Control_rtZOutput = {
   0.0F,                                /* va */

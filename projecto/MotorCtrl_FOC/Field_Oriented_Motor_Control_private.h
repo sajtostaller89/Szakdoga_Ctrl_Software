@@ -22,7 +22,7 @@
 
 #ifndef RTW_HEADER_Field_Oriented_Motor_Control_private_h_
 #define RTW_HEADER_Field_Oriented_Motor_Control_private_h_
-#include "../MotorCtrl_FOC/rtwtypes.h"
+#include "rtwtypes.h"
 #endif                                 /* RTW_HEADER_Field_Oriented_Motor_Control_private_h_ */
 
 /*

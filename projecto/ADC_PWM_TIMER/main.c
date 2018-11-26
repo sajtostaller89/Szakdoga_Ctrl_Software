@@ -83,7 +83,7 @@ void main(void)
 // Step 5. User specific code, enable interrupts------------------------------------------------------------------------------------------
 
     ConfigEnableInterrupts();
-
+    Field_Oriented_Motor_Control_initialize();
 
 
 // Step 6. IDLE loop. Just sit and loop forever (optional)--------------------------------------------------------------------------------

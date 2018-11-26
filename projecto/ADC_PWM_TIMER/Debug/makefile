@@ -16,6 +16,8 @@ ORDERED_OBJS += \
 "./general.obj" \
 "./main.obj" \
 "./timer.obj" \
+"./MotorCtrl_FOC/Field_Oriented_Motor_Control.obj" \
+"./MotorCtrl_FOC/Field_Oriented_Motor_Control_data.obj" \
 "./Source/F2806x_Adc.obj" \
 "./Source/F2806x_CodeStartBranch.obj" \
 "./Source/F2806x_Comp.obj" \
@@ -53,9 +55,11 @@ RMDIR := RMDIR /S/Q
 -include sources.mk
 -include subdir_vars.mk
 -include Include/subdir_vars.mk
+-include MotorCtrl_FOC/subdir_vars.mk
 -include Source/subdir_vars.mk
 -include subdir_rules.mk
 -include Include/subdir_rules.mk
+-include MotorCtrl_FOC/subdir_rules.mk
 -include Source/subdir_rules.mk
 -include objects.mk
 
@@ -187,8 +191,8 @@ ADC_PWM_TIMER.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "adc.obj" "ecap.obj" "epwm.obj" "general.obj" "main.obj" "timer.obj" "Source\F2806x_Adc.obj" "Source\F2806x_CodeStartBranch.obj" "Source\F2806x_Comp.obj" "Source\F2806x_CpuTimers.obj" "Source\F2806x_DefaultIsr.obj" "Source\F2806x_Dma.obj" "Source\F2806x_ECan.obj" "Source\F2806x_ECap.obj" "Source\F2806x_EPwm.obj" "Source\F2806x_EQep.obj" "Source\F2806x_GlobalVariableDefs.obj" "Source\F2806x_Gpio.obj" "Source\F2806x_HRCap.obj" "Source\F2806x_I2C.obj" "Source\F2806x_Mcbsp.obj" "Source\F2806x_OscComp.obj" "Source\F2806x_PieCtrl.obj" "Source\F2806x_PieVect.obj" "Source\F2806x_Sci.obj" "Source\F2806x_Spi.obj" "Source\F2806x_SysCtrl.obj" "Source\F2806x_usDelay.obj" 
-	-$(RM) "adc.d" "ecap.d" "epwm.d" "general.d" "main.d" "timer.d" "Source\F2806x_Adc.d" "Source\F2806x_Comp.d" "Source\F2806x_CpuTimers.d" "Source\F2806x_DefaultIsr.d" "Source\F2806x_Dma.d" "Source\F2806x_ECan.d" "Source\F2806x_ECap.d" "Source\F2806x_EPwm.d" "Source\F2806x_EQep.d" "Source\F2806x_GlobalVariableDefs.d" "Source\F2806x_Gpio.d" "Source\F2806x_HRCap.d" "Source\F2806x_I2C.d" "Source\F2806x_Mcbsp.d" "Source\F2806x_OscComp.d" "Source\F2806x_PieCtrl.d" "Source\F2806x_PieVect.d" "Source\F2806x_Sci.d" "Source\F2806x_Spi.d" "Source\F2806x_SysCtrl.d" 
+	-$(RM) "adc.obj" "ecap.obj" "epwm.obj" "general.obj" "main.obj" "timer.obj" "MotorCtrl_FOC\Field_Oriented_Motor_Control.obj" "MotorCtrl_FOC\Field_Oriented_Motor_Control_data.obj" "Source\F2806x_Adc.obj" "Source\F2806x_CodeStartBranch.obj" "Source\F2806x_Comp.obj" "Source\F2806x_CpuTimers.obj" "Source\F2806x_DefaultIsr.obj" "Source\F2806x_Dma.obj" "Source\F2806x_ECan.obj" "Source\F2806x_ECap.obj" "Source\F2806x_EPwm.obj" "Source\F2806x_EQep.obj" "Source\F2806x_GlobalVariableDefs.obj" "Source\F2806x_Gpio.obj" "Source\F2806x_HRCap.obj" "Source\F2806x_I2C.obj" "Source\F2806x_Mcbsp.obj" "Source\F2806x_OscComp.obj" "Source\F2806x_PieCtrl.obj" "Source\F2806x_PieVect.obj" "Source\F2806x_Sci.obj" "Source\F2806x_Spi.obj" "Source\F2806x_SysCtrl.obj" "Source\F2806x_usDelay.obj" 
+	-$(RM) "adc.d" "ecap.d" "epwm.d" "general.d" "main.d" "timer.d" "MotorCtrl_FOC\Field_Oriented_Motor_Control.d" "MotorCtrl_FOC\Field_Oriented_Motor_Control_data.d" "Source\F2806x_Adc.d" "Source\F2806x_Comp.d" "Source\F2806x_CpuTimers.d" "Source\F2806x_DefaultIsr.d" "Source\F2806x_Dma.d" "Source\F2806x_ECan.d" "Source\F2806x_ECap.d" "Source\F2806x_EPwm.d" "Source\F2806x_EQep.d" "Source\F2806x_GlobalVariableDefs.d" "Source\F2806x_Gpio.d" "Source\F2806x_HRCap.d" "Source\F2806x_I2C.d" "Source\F2806x_Mcbsp.d" "Source\F2806x_OscComp.d" "Source\F2806x_PieCtrl.d" "Source\F2806x_PieVect.d" "Source\F2806x_Sci.d" "Source\F2806x_Spi.d" "Source\F2806x_SysCtrl.d" 
 	-$(RM) "Source\F2806x_CodeStartBranch.d" "Source\F2806x_usDelay.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

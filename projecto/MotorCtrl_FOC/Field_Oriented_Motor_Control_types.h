@@ -22,7 +22,7 @@
 
 #ifndef RTW_HEADER_Field_Oriented_Motor_Control_types_h_
 #define RTW_HEADER_Field_Oriented_Motor_Control_types_h_
-#include "../MotorCtrl_FOC/rtwtypes.h"
+#include "rtwtypes.h"
 #ifndef DEFINED_TYPEDEF_FOR_Input_
 #define DEFINED_TYPEDEF_FOR_Input_
 

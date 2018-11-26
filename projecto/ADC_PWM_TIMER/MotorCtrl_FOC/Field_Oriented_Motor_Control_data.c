@@ -20,8 +20,8 @@
  * Validation result: Not run
  */
 
-#include "Field_Oriented_Motor_Control.h"
-#include "Field_Oriented_Motor_Control_private.h"
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control.h>
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control_private.h>
 
 /* Invariant block signals (default storage) */
 const ConstB_Field_Oriented_Motor_Control_T Field_Oriented_Motor_Control_ConstB =

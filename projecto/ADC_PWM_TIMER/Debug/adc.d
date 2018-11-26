@@ -1,6 +1,16 @@
 # FIXED
 
 adc.obj: ../adc.c
+adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/MotorCtrl_FOC/Field_Oriented_Motor_Control.h
+adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/math.h
+adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/_ti_config.h
+adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/linkage.h
+adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/_defs.h
+adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/stddef.h
+adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/string.h
+adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/MotorCtrl_FOC/../MotorCtrl_FOC/rtwtypes.h
+adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/MotorCtrl_FOC/../MotorCtrl_FOC/Field_Oriented_Motor_Control_types.h
+adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/MotorCtrl_FOC/Field_Oriented_Motor_Control_private.h
 adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/DSP28x_Project.h
 adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Device.h
 adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Adc.h
@@ -33,12 +43,19 @@ adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_
 adc.obj: ../pheripherals.h
 adc.obj: G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/IQmathLib.h
 adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/limits.h
-adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/math.h
-adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/_ti_config.h
-adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/linkage.h
-adc.obj: G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/_defs.h
+adc.obj: ../general.h
 
 ../adc.c: 
+G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/MotorCtrl_FOC/Field_Oriented_Motor_Control.h: 
+G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/math.h: 
+G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/_ti_config.h: 
+G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/linkage.h: 
+G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/_defs.h: 
+G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/stddef.h: 
+G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/string.h: 
+G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/MotorCtrl_FOC/../MotorCtrl_FOC/rtwtypes.h: 
+G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/MotorCtrl_FOC/../MotorCtrl_FOC/Field_Oriented_Motor_Control_types.h: 
+G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/MotorCtrl_FOC/Field_Oriented_Motor_Control_private.h: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/DSP28x_Project.h: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Device.h: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_Adc.h: 
@@ -71,7 +88,4 @@ G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/F2806x_EPwm_defi
 ../pheripherals.h: 
 G:/GitHub/Szakdoga_Ctrl_Software/projecto/ADC_PWM_TIMER/Include/IQmathLib.h: 
 G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/limits.h: 
-G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/math.h: 
-G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/_ti_config.h: 
-G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/linkage.h: 
-G:/Programok/ti/8.2.0/ccsv8/tools/compiler/ti-cgt-c2000_18.1.3.LTS/include/_defs.h: 
+../general.h: 

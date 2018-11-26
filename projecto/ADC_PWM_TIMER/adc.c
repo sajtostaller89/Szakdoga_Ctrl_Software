@@ -16,10 +16,29 @@
  *
  */
 
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control.h>
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control_private.h>
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control_types.h>
 #include "DSP28x_Project.h"     // Device Headerfile and Examples Include File
 #include "F2806x_EPwm_defines.h"
 #include "pheripherals.h"
 #include "math.h"
+#include "general.h"
+
+//SOON TO BE DELETED TODO:
+
+Uint16 sinelookup[100] = {
+                          7500,7971,8440,8905,9365,9818,10261,10693,11113,11519,11908,12281,12634,12967,13279,13568,13832,14072,14286,14473,14633,14764,14867,14941,14985,15000,14985,14941,14867,14764,14633,14473,14286,14072,13832,13568,13279,12967,12634,12281,11908,11519,11113,10693,10261,9818,9365,8905,8440,7971,7500,7029,6560,6095,5635,5182,4739,4307,3887,3481,3092,2719,2366,2033,1721,1432,1168,928,714,527,367,236,133,59,15,0,15,59,133,236,367,527,714,928,1168,1432,1721,2033,2366,2719,3092,3481,3887,4307,4739,5182,5635,6095,6560,7029,
+
+                        };
+
+
+int anyad = 0;
+int lol=0;
+Uint16 fuckA = 0;
+Uint16 fuckB = 0;
+
+
 
 
 // Resolver measurement variables
@@ -41,9 +60,11 @@ float32 Voltage0[100];
 float32 Voltage1[100];
 float32 value0 = 1.0;
 float32 value1 = 1.0;
+float32 currenta = 0.0;
+float32 currentb = 0.0;
+float32 currentc = 0.0;
 
-
-Uint16 temp0, temp1;
+Uint16 temp0, temp1, temp2, temp3;
 
 float32 control_loop(float32 angle_in){
     angle_error = angle_in-Theta;
@@ -74,7 +95,7 @@ void Adc1_Config(){
     AdcRegs.INTSEL1N2.bit.INT1CONT      = 0;    // Disable ADCINT1 Continuous mode
     AdcRegs.INTSEL1N2.bit.INT1SEL       = 1;    // setup EOC1 to trigger ADCINT1 to fire, this way an interrupt occurs when both samples are ready
     AdcRegs.ADCSOC0CTL.bit.CHSEL        = 1;    // In simultaneous mode we only need to set SOC0 channel select to ADCINA1 and ADCINB1
-    AdcRegs.ADCSOC0CTL.bit.TRIGSEL      = 11;    // ADCTRIG11 = ePWM4.ADCSOCA, thats what we will set up
+    AdcRegs.ADCSOC0CTL.bit.TRIGSEL      = 11;   // ADCTRIG11 = ePWM4.ADCSOCA, thats what we will set up
     AdcRegs.ADCSOC0CTL.bit.ACQPS        = 6;    // set SOC0 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     AdcRegs.ADCSOC1CTL.bit.ACQPS        = 6;    // set SOC1 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
     EDIS;
@@ -111,39 +132,46 @@ void Adc4_Config(){
 //ADC function call
 __interrupt void adc1_isr(void)
 {
+    temp2 = AdcResult.ADCRESULT0;
+    temp3 = AdcResult.ADCRESULT1;
 
-    /*
-    value0 = (float32)AdcResult.ADCRESULT0*3.3/4096;
-    if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
-        value0 = Voltage1[ConversionCount-1];
-    Voltage0[ConversionCount] = value0;
+    currenta = ((float32)temp2*3.3/4096-1.65)*40;      // Fullscale is 40A
+    currentb = ((float32)temp3*3.3/4096-1.65)*40;       //1.65 helyére kell amit majd megintcsak mérek
+    currentc = -currenta-currentb;
 
-    value1 = (float32)AdcResult.ADCRESULT1*3.3/4096;
-    if(((value1 > 3.3) || (value1 < 0)) && (ConversionCount > 0))
-        value1 = Voltage1[ConversionCount-1];
-    Voltage1[ConversionCount] = value1;
+    Inputs.ia = currenta;
+    Inputs.ib = currentb;
+    Inputs.ic = currentc;
+    Inputs.angle = (real32_T)Theta;
+    Inputs.speed = (real32_T)speed;
+
+// Place for the DC link measurement is here
+
+    //Field_Oriented_Motor_Control_step();
+
+    //update_compare(Outputs);
 
 
-    // If 2000 conversions have been logged, start over
-    if(ConversionCount == 999)
-    {
-        ConversionCount = 0;
-    }
-    else
-    {
-        ConversionCount++;
-    }
+if (anyad == 20){
+    lol++;
+    fuckA = sinelookup[lol];
+            if(fuckA > 15000 - deadtime)
+                fuckA = 15000 - deadtime;
+            if(fuckA < deadtime)
+                fuckA = deadtime;       // lehet hogy deadtime/2 kéne?
 
-*/
-    /*-Field_Oriented_Motor_Control_rtZInput.ia = 0.0f;
-    Field_Oriented_Motor_Control_rtZInput.ib = 0.0f;
-    Field_Oriented_Motor_Control_rtZInput.ic = 0.0f;
-    Field_Oriented_Motor_Control_rtZInput.angle = (real_32T)Theta;
-    Field_Oriented_Motor_Control_rtZInput.speed = (real_32T)speed;
-    Field_Oriented_Motor_Control_step();*/
+            EPwm4Regs.CMPA.half.CMPA = fuckA+deadtime;
+            EPwm4Regs.CMPB           = fuckA-deadtime;
+
+
+            if (lol==99)
+                lol=0;
+            anyad = 0;
+}
+anyad++;
+
     // Clear ADCINT1 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
-
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;   // Acknowledge interrupt to PIE
 
     return;

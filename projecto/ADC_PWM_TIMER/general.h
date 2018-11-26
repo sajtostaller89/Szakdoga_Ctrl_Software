@@ -8,16 +8,19 @@
 #ifndef GENERAL_H_
 #define GENERAL_H_
 
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control.h>
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control_private.h>
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control_types.h>
+
 //Update compare the order of the declaration of the typedef is important !
-void update_compare();
-double duty_calc(void);
+extern void update_compare(Output FOC_voltages);
 
-void ConfigEnableInterrupts(void);  //should be somewhere else because it is no a pheripheral
-void ConfigPieVectTable(void);      //same
+void ConfigEnableInterrupts(void);
+void ConfigPieVectTable(void);
 
-#define phase_voltage = 60.0             //Egyelõre legyen global TODO: make it not global
-#define dclink_voltage = 60.0           // TODO:declare elsewhere (in general.h?)
+extern float dclink_voltage;
 
+extern Uint16 deadtime;      // In 1/90 ns = 0.0111111111 ns, 450 => 5ns
 
 
 #endif /* GENERAL_H_ */

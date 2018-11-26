@@ -20,9 +20,9 @@ void ConfigPieVectTable(){
     PieVectTable.ADCINT2 = &adc2_isr;       //First the ADC2
     PieVectTable.ADCINT3 = &adc3_isr;       //First the ADC3
 
-    PieVectTable.EPWM1_INT = &epwm4_isr;    //Second the ePWM1
-    PieVectTable.EPWM2_INT = &epwm5_isr;    //Second the ePWM1
-    PieVectTable.EPWM3_INT = &epwm6_isr;    //Second the ePWM1
+    //PieVectTable.EPWM1_INT = &epwm4_isr;    //Second the ePWM4
+    //PieVectTable.EPWM2_INT = &epwm5_isr;    //Second the ePWM1
+    //PieVectTable.EPWM3_INT = &epwm6_isr;    //Second the ePWM1
 
     PieVectTable.TINT0 = &cpu_timer0_isr;   //Third the CPU Timers (by Mate 2018.09.16.)
     PieVectTable.TINT1 = &cpu_timer1_isr;
@@ -40,7 +40,7 @@ void ConfigEnableInterrupts(){
     IER |= M_INT10;                      // Enable CPU Interrupt 10 for adcint3
 
      // Enable CPU INT3 which is connected to EPWM1-3 INT:
-     IER |= M_INT3;                      // Enable CPU Interrupt 3
+     //IER |= M_INT3;                      // Enable CPU Interrupt 3
      EINT;                               // Enable Global interrupt INTM
      ERTM;                               // Enable Global realtime interrupt DBGM
 
@@ -70,10 +70,4 @@ void ConfigEnableInterrupts(){
      // Enable global Interrupts and higher priority real-time debug events
      EINT;   // Enable Global interrupt INTM
      ERTM;   // Enable Global realtime interrupt DBGM
-}
-
-double duty_calc(){         //general.h should contain all the necessary values for dclink, etc.
-
-    //return (phase_voltage/dclink_voltage);
-    return 2.0;
 }

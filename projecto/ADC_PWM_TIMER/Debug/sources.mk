@@ -113,5 +113,6 @@ PDE_DEPS__QUOTED :=
 SUBDIRS := \
 . \
 Include \
+MotorCtrl_FOC \
 Source \
 

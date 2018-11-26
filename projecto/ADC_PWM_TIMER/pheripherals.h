@@ -16,9 +16,9 @@ void Adc4_Config(void);
 
 
 //ePWM
-__interrupt void epwm4_isr(void);
-__interrupt void epwm5_isr(void);
-__interrupt void epwm6_isr(void);
+//__interrupt void epwm4_isr(void);
+//__interrupt void epwm5_isr(void);
+//__interrupt void epwm6_isr(void);
 
 void EPwm1_Config(void);    // For the current meas
 void EPwm2_Config(void);    // For the resolver meas
@@ -30,7 +30,7 @@ void EPwm6_Config(void);
 // Defines that configure the period for each timer
 #define EPWM2_TIMER_TBPRD  900    // Period register for the 100 kHz sample time
 
-#define EPWM4_TIMER_TBPRD  15000  // Period register because fpwm = 1 /2*15000*90 MHz = 3000 Hz
+#define EPWM4_TIMER_TBPRD  15000  // Period register because fpwm = 1 /2*15000 *90 MHz = 3000 Hz
 #define EPWM5_TIMER_TBPRD  15000  // Period register
 #define EPWM6_TIMER_TBPRD  15000  // Period register
 

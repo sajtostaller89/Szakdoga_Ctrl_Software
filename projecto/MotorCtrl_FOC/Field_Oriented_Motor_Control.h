@@ -27,10 +27,10 @@
 #include <string.h>
 #ifndef Field_Oriented_Motor_Control_COMMON_INCLUDES_
 # define Field_Oriented_Motor_Control_COMMON_INCLUDES_
-#include "../MotorCtrl_FOC/rtwtypes.h"
+#include "rtwtypes.h"
 #endif                                 /* Field_Oriented_Motor_Control_COMMON_INCLUDES_ */
 
-#include "../MotorCtrl_FOC/Field_Oriented_Motor_Control_types.h"
+#include "Field_Oriented_Motor_Control_types.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus

@@ -10,11 +10,19 @@
 #include "F2806x_EPwm_defines.h"
 #include "pheripherals.h"
 #include "general.h"
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control.h>
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control_private.h>
+#include <MotorCtrl_FOC/Field_Oriented_Motor_Control_types.h>
+
+Uint16 duty4, duty5, duty6;
+float dclink_voltage = 60.0;
+Uint16 deadtime = 4; // 40ns mert ez csak a fele
+
 
 __interrupt void epwm4_isr(void)
 {
-    // Update the CMPA and CMPB values
-    update_compare();
+    // Update the CMPA and CMPB values for every phase(epwm 4-6)
+    //update_compare(Outputs);
 
 
     // Clear INT flag for this timer
@@ -24,7 +32,7 @@ __interrupt void epwm4_isr(void)
     return;
 }
 
-__interrupt void epwm5_isr(void)
+/*__interrupt void epwm5_isr(void)
 {
     // Update the CMPA and CMPB values
     update_compare();
@@ -48,7 +56,7 @@ __interrupt void epwm6_isr(void)
     // Acknowledge this interrupt to receive more interrupts from group 3
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
     return;
-}
+}*/
 
 
 //ePWM
@@ -108,8 +116,8 @@ void EPwm4_Config()
     EPwm4Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
 
     // Set Compare values, not using dead-band module
-    EPwm4Regs.CMPA.half.CMPA = EPWM4_TIMER_TBPRD/2+250;          // Set compare A value used to be 1
-    EPwm4Regs.CMPB = EPWM4_TIMER_TBPRD/2-250;          // Set Compare B value used to be 1
+    EPwm4Regs.CMPA.half.CMPA = EPWM4_TIMER_TBPRD/2+deadtime;          // Set compare A value used to be 1
+    EPwm4Regs.CMPB = EPWM4_TIMER_TBPRD/2-deadtime;          // Set Compare B value used to be 1
 
     // Set actions
     EPwm4Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
@@ -118,14 +126,14 @@ void EPwm4_Config()
     EPwm4Regs.AQCTLB.bit.CBD = AQ_SET;      // Set PWM1B on Zero
     EPwm4Regs.AQCTLB.bit.CBU = AQ_CLEAR;    // Clear PWM1B on event B, up count
 
-    // Interrupt where we will change the Compare Values
+    // Interrupt where we will change the Compare Values or we should change the values inside the adc interrupt right
     //EPwm4Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
     //EPwm4Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
     //EPwm4Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
 
-    // ePWM4 triggers current measurement
+    // ePWM4 triggers current measurement with 6kHz
     EPwm4Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
-    EPwm4Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD TODO:or this should be cmpa?
+    EPwm4Regs.ETSEL.bit.SOCASEL = 3;            // Select SOC on CTR=0 OR CTR=PRD
     EPwm4Regs.ETPS.bit.SOCAPRD  = 1;            // Generate pulse on every 1st event
 
     EALLOW;
@@ -157,8 +165,8 @@ void EPwm5_Config()
     EPwm5Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
 
     // Set Compare values, not using dead-band module
-    EPwm5Regs.CMPA.half.CMPA = EPWM5_TIMER_TBPRD/2+500;          // Set compare A value, should be >=1
-    EPwm5Regs.CMPB = EPWM5_TIMER_TBPRD/2-500;          // Set Compare B value, should be >=1 200 is good ie
+    EPwm5Regs.CMPA.half.CMPA = EPWM5_TIMER_TBPRD/2+deadtime;          // Set compare A value, should be >=1
+    EPwm5Regs.CMPB = EPWM5_TIMER_TBPRD/2-deadtime;          // Set Compare B value, should be >=1 200 is good ie
 
     // Set actions
     EPwm5Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
@@ -167,10 +175,10 @@ void EPwm5_Config()
     EPwm5Regs.AQCTLB.bit.CBD = AQ_SET;      // Inverter working principle
     EPwm5Regs.AQCTLB.bit.CBU = AQ_CLEAR;
 
-    // Interrupt where we will change the Compare Values
+    /*// Interrupt where we will change the Compare Values
     EPwm5Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
     EPwm5Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
-    EPwm5Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
+    EPwm5Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event*/
 
     EALLOW;
     SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      //Then enable the sync
@@ -201,8 +209,8 @@ void EPwm6_Config()
     EPwm6Regs.CMPCTL.bit.LOADBMODE = CC_CTR_ZERO;
 
     // Set Compare values, not using dead-band module
-    EPwm6Regs.CMPA.half.CMPA = EPWM6_TIMER_TBPRD/2+100;          // Set compare A value used to be 1
-    EPwm6Regs.CMPB = EPWM6_TIMER_TBPRD/2-100;          // Set Compare B value used to be 1
+    EPwm6Regs.CMPA.half.CMPA = EPWM6_TIMER_TBPRD/2+deadtime;          // Set compare A value used to be 1
+    EPwm6Regs.CMPB = EPWM6_TIMER_TBPRD/2-deadtime;          // Set Compare B value used to be 1
 
     // Set actions
     EPwm6Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
@@ -211,19 +219,48 @@ void EPwm6_Config()
     EPwm6Regs.AQCTLB.bit.CBD = AQ_SET;      // Set PWM1B on Zero
     EPwm6Regs.AQCTLB.bit.CBU = AQ_CLEAR;    // Clear PWM1B on event B, up count
 
-    // Interrupt where we will change the Compare Values
+    /*// Interrupt where we will change the Compare Values
     EPwm6Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
     EPwm6Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
-    EPwm6Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
+    EPwm6Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event*/
 
     EALLOW;
     SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      //Then enable the sync
     EDIS;
 }
 
-void update_compare()   //ide majd ugye be kéne adni egy doulet ami az adott fázisra megadja h mennyinek kell lennie feszben
+void update_compare(Output FOC_voltages)
 {
-    //EPwm1Regs.CMPA.half.CMPA    = (Uint16)(1.0 - duty_calc())*EPWM1_TIMER_TBPRD;
-    //EPwm1Regs.CMPB              = (EPWM1_TIMER_TBPRD - EPwm1Regs.CMPA.half.CMPA);
+    // Duty calculation
+    duty4 = (Uint16)(1.0 - (FOC_voltages.va/dclink_voltage))*EPWM4_TIMER_TBPRD;
+    duty5 = (Uint16)(1.0 - (FOC_voltages.vb/dclink_voltage))*EPWM5_TIMER_TBPRD;
+    duty6 = (Uint16)(1.0 - (FOC_voltages.vc/dclink_voltage))*EPWM6_TIMER_TBPRD;
+
+    // Duty corrections in case of invalid values, regarding the deadtime corrections' nature
+    if(duty4 > EPWM4_TIMER_TBPRD - deadtime)
+        duty4 = EPWM4_TIMER_TBPRD - deadtime;
+    if(duty4 < deadtime)
+        duty4 = deadtime;
+
+    if(duty5 > EPWM5_TIMER_TBPRD - deadtime)
+        duty5 = EPWM5_TIMER_TBPRD - deadtime;
+    if(duty5 < deadtime)
+        duty5 = deadtime;
+
+    if(duty6 > EPWM6_TIMER_TBPRD - deadtime)
+        duty6 = EPWM6_TIMER_TBPRD - deadtime;
+    if(duty6 < deadtime)
+        duty6 = deadtime;
+
+    // Updating compare values and effectuating with the deadtime
+    EPwm4Regs.CMPA.half.CMPA    = duty4 + deadtime;
+    EPwm4Regs.CMPB              = duty4 - deadtime;
+
+    EPwm5Regs.CMPA.half.CMPA    = duty5 + deadtime;
+    EPwm5Regs.CMPB              = duty5- deadtime;
+
+    EPwm6Regs.CMPA.half.CMPA    = duty6 + deadtime;
+    EPwm6Regs.CMPB              = duty6 - deadtime;
+
     return;
 }
