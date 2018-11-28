@@ -10,50 +10,38 @@ CMD_SRCS += \
 
 C_SRCS += \
 ../adc.c \
-../ecap.c \
 ../epwm.c \
 ../general.c \
-../main.c \
-../timer.c 
+../main.c 
 
 C_DEPS += \
 ./adc.d \
-./ecap.d \
 ./epwm.d \
 ./general.d \
-./main.d \
-./timer.d 
+./main.d 
 
 OBJS += \
 ./adc.obj \
-./ecap.obj \
 ./epwm.obj \
 ./general.obj \
-./main.obj \
-./timer.obj 
+./main.obj 
 
 OBJS__QUOTED += \
 "adc.obj" \
-"ecap.obj" \
 "epwm.obj" \
 "general.obj" \
-"main.obj" \
-"timer.obj" 
+"main.obj" 
 
 C_DEPS__QUOTED += \
 "adc.d" \
-"ecap.d" \
 "epwm.d" \
 "general.d" \
-"main.d" \
-"timer.d" 
+"main.d" 
 
 C_SRCS__QUOTED += \
 "../adc.c" \
-"../ecap.c" \
 "../epwm.c" \
 "../general.c" \
-"../main.c" \
-"../timer.c" 
+"../main.c" 
 
 

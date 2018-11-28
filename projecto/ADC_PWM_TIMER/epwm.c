@@ -16,7 +16,7 @@
 
 Uint16 duty4, duty5, duty6;
 float dclink_voltage = 60.0;
-Uint16 deadtime = 4; // 40ns mert ez csak a fele
+Uint16 deadtime = 70; // 40ns mert ez csak a fele
 
 
 __interrupt void epwm4_isr(void)
@@ -31,32 +31,6 @@ __interrupt void epwm4_isr(void)
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
     return;
 }
-
-/*__interrupt void epwm5_isr(void)
-{
-    // Update the CMPA and CMPB values
-    update_compare();
-
-
-    // Clear INT flag for this timer
-    EPwm2Regs.ETCLR.bit.INT = 1;
-    // Acknowledge this interrupt to receive more interrupts from group 3
-    PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
-    return;
-}
-
-__interrupt void epwm6_isr(void)
-{
-    // Update the CMPA and CMPB values
-    update_compare();
-
-
-    // Clear INT flag for this timer
-    EPwm3Regs.ETCLR.bit.INT = 1;
-    // Acknowledge this interrupt to receive more interrupts from group 3
-    PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
-    return;
-}*/
 
 
 //ePWM

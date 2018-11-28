@@ -13,7 +13,6 @@ void main(void)
     InitSysCtrl();
 
 
-
 // Step 2. Initalize GPIO:----------------------------------------------------------------------------------------------------------------
 
     InitAdcAio();   //not necessary maybe
@@ -22,10 +21,6 @@ void main(void)
     InitEPwm4Gpio();
     InitEPwm5Gpio();
     InitEPwm6Gpio();
-
-    //Init eCAP to catch ePWM
-    InitECap1Gpio(); //eCAP1 is on GPIO19
-
 
 
 // Step 3. Clear all interrupts and initialize PIE vector table:--------------------------------------------------------------------------
@@ -46,7 +41,6 @@ void main(void)
     ConfigPieVectTable();
 
 
-
 // Step 4. Initialize all the Device Peripherals:-----------------------------------------------------------------------------------------
 
     // Initialize the ADCs
@@ -65,19 +59,6 @@ void main(void)
     EPwm4_Config();     // Triggers adc1 and adc4?
     EPwm5_Config();
     EPwm6_Config();
-
-    //Initialize the CPUTimers
-    InitCpuTimers();
-    // Configure CPU-Timer 0, 1, and 2 to interrupt every second: 80MHz CPU Freq, 1 second Period (in uSeconds)
-    //ConfigCpuTimer(&CpuTimer0, 80, 110); //Interrupt 0.11ms
-    //ConfigCpuTimer(&CpuTimer1, 80, 200); //Interrupt 0.2ms
-    //ConfigCpuTimer(&CpuTimer2, 80, 200); //Interrupt 0.2ms
-
-    // Initialize the eCAP
-    // InitPeripherals();
-    InitEPwmTimer();
-    InitECapture();
-
 
 
 // Step 5. User specific code, enable interrupts------------------------------------------------------------------------------------------

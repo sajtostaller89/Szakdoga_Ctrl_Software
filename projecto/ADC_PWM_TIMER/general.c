@@ -20,16 +20,6 @@ void ConfigPieVectTable(){
     PieVectTable.ADCINT2 = &adc2_isr;       //First the ADC2
     PieVectTable.ADCINT3 = &adc3_isr;       //First the ADC3
 
-    //PieVectTable.EPWM1_INT = &epwm4_isr;    //Second the ePWM4
-    //PieVectTable.EPWM2_INT = &epwm5_isr;    //Second the ePWM1
-    //PieVectTable.EPWM3_INT = &epwm6_isr;    //Second the ePWM1
-
-    PieVectTable.TINT0 = &cpu_timer0_isr;   //Third the CPU Timers (by Mate 2018.09.16.)
-    PieVectTable.TINT1 = &cpu_timer1_isr;
-    PieVectTable.TINT2 = &cpu_timer2_isr;
-
-    PieVectTable.ECAP1_INT = &ecap1_isr;    //Fourth eCAP (by Mate 2018.09.16.)
-
     EDIS;                                   // This is needed to disable write to EALLOW protected registers
 
 }
@@ -44,28 +34,11 @@ void ConfigEnableInterrupts(){
      EINT;                               // Enable Global interrupt INTM
      ERTM;                               // Enable Global realtime interrupt DBGM
 
-     // Enable CPU INT12, INT13 and INT14 for CPU TIMERS
-     IER |= M_INT12; //Timer0
-     IER |= M_INT13; //Timer1
-     IER |= M_INT14; //Timer2
-
-     // Enable CPU INT4 which is connected to ECAP1-4 INT
-     IER |= M_INT4;
 
      // Enable ADC INTn in the PIE: Group 1 interrupt 1
      PieCtrlRegs.PIEIER1.bit.INTx1 = 1;
      PieCtrlRegs.PIEIER1.bit.INTx2 = 1;
 
-     // Enable EPWM INTn in the PIE: Group 3 interrupt 1-3
-     PieCtrlRegs.PIEIER3.bit.INTx1 = 1;
-     PieCtrlRegs.PIEIER3.bit.INTx2 = 1;
-     PieCtrlRegs.PIEIER3.bit.INTx3 = 1;
-
-     // Enable TIMER TINT0 in the PIE: Group 1 interrupt 7
-     PieCtrlRegs.PIEIER1.bit.INTx7 = 1;
-
-     // Enable eCAP INTn in the PIE: Group 3 interrupt 1-6
-     PieCtrlRegs.PIEIER4.bit.INTx1 = 1;
 
      // Enable global Interrupts and higher priority real-time debug events
      EINT;   // Enable Global interrupt INTM

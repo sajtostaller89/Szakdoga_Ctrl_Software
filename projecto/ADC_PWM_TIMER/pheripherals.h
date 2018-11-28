@@ -16,10 +16,6 @@ void Adc4_Config(void);
 
 
 //ePWM
-//__interrupt void epwm4_isr(void);
-//__interrupt void epwm5_isr(void);
-//__interrupt void epwm6_isr(void);
-
 void EPwm1_Config(void);    // For the current meas
 void EPwm2_Config(void);    // For the resolver meas
 void EPwm3_Config(void);    // For the voltage meas
@@ -34,22 +30,5 @@ void EPwm6_Config(void);
 #define EPWM5_TIMER_TBPRD  15000  // Period register
 #define EPWM6_TIMER_TBPRD  15000  // Period register
 
-//Defines to keep track of which way the timer value is moving (by Mate 2018.09.16.)
-#define EPWM_TIMER_UP   1
-#define EPWM_TIMER_DOWN 0
-#define PWM1_TIMER_MIN     10
-#define PWM1_TIMER_MAX     1900
 
-
-//TIMER
-__interrupt void cpu_timer0_isr(void);
-__interrupt void cpu_timer1_isr(void);
-__interrupt void cpu_timer2_isr(void);
-
-
-//eCAP
-__interrupt void ecap1_isr(void);
-void InitECapture(void);
-void InitEPwmTimer(void);
-void Fail(void);
 #endif

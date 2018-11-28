@@ -47,6 +47,9 @@ float32 Angle00 = 0.0, Angle01 = 0.0, Angle10 = 0.0, Angle11 = 0.0;
 volatile float32 Theta = 0.0, Theta_out = 0.0;
 Uint16 cc_max = 99;
 
+// Voltage measurement
+float32 DClink_voltage = 0.0;
+
 // Control loop variables
 float32 integral1 = 0.0, integral2 = 0.0;
 float32 Kp = 50.0, Ki = 100.0, Ts = 0.001; //1kHz
@@ -64,7 +67,8 @@ float32 currenta = 0.0;
 float32 currentb = 0.0;
 float32 currentc = 0.0;
 
-Uint16 temp0, temp1, temp2, temp3;
+Uint16 temp0 = 0, temp1 = 0, temp2 = 0, temp3 = 0, temp4 = 0;
+
 
 float32 control_loop(float32 angle_in){
     angle_error = angle_in-Theta;
@@ -145,14 +149,22 @@ __interrupt void adc1_isr(void)
     Inputs.angle = (real32_T)Theta;
     Inputs.speed = (real32_T)speed;
 
-// Place for the DC link measurement is here
+    Field_Oriented_Motor_Control_step();
 
-    //Field_Oriented_Motor_Control_step();
+    //DC link inspection and reaction
 
-    //update_compare(Outputs);
+    if(DClink_voltage > 65 || DClink_voltage < 30 ||
+    currenta > 20 || currentb > 20 || currentc > 20 ||
+    currenta < -20 || currentb < -20 || currentc < -20){
+        Outputs.va = 0;
+        Outputs.vb = 0;
+        Outputs.vc = 0;
+    }
+
+    update_compare(Outputs);
 
 
-if (anyad == 20){
+/*if (anyad == 20){
     lol++;
     fuckA = sinelookup[lol];
             if(fuckA > 15000 - deadtime)
@@ -168,7 +180,7 @@ if (anyad == 20){
                 lol=0;
             anyad = 0;
 }
-anyad++;
+anyad++;*/
 
     // Clear ADCINT1 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
@@ -241,7 +253,8 @@ __interrupt void adc2_isr(void)
 
 __interrupt void adc3_isr(void)
 {
-
+    temp4 = AdcResult.ADCRESULT4;
+    DClink_voltage = (float32)temp3*3.3/4096;
 
     // Clear ADCINT3 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT3 = 1;
