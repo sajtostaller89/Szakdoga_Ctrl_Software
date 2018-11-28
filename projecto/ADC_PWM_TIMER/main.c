@@ -56,7 +56,7 @@ void main(void)
 
 
     // Initialize the ePWMs for the phases
-    EPwm4_Config();     // Triggers adc1 and adc4?
+    EPwm4_Config();     // Triggers adc1 and adc4
     EPwm5_Config();
     EPwm6_Config();
 

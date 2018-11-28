@@ -30,7 +30,6 @@ void ConfigEnableInterrupts(){
     IER |= M_INT10;                      // Enable CPU Interrupt 10 for adcint3
 
      // Enable CPU INT3 which is connected to EPWM1-3 INT:
-     //IER |= M_INT3;                      // Enable CPU Interrupt 3
      EINT;                               // Enable Global interrupt INTM
      ERTM;                               // Enable Global realtime interrupt DBGM
 

@@ -25,22 +25,6 @@
 #include "math.h"
 #include "general.h"
 
-//SOON TO BE DELETED TODO:
-
-Uint16 sinelookup[100] = {
-                          7500,7971,8440,8905,9365,9818,10261,10693,11113,11519,11908,12281,12634,12967,13279,13568,13832,14072,14286,14473,14633,14764,14867,14941,14985,15000,14985,14941,14867,14764,14633,14473,14286,14072,13832,13568,13279,12967,12634,12281,11908,11519,11113,10693,10261,9818,9365,8905,8440,7971,7500,7029,6560,6095,5635,5182,4739,4307,3887,3481,3092,2719,2366,2033,1721,1432,1168,928,714,527,367,236,133,59,15,0,15,59,133,236,367,527,714,928,1168,1432,1721,2033,2366,2719,3092,3481,3887,4307,4739,5182,5635,6095,6560,7029,
-
-                        };
-
-
-int anyad = 0;
-int lol=0;
-Uint16 fuckA = 0;
-Uint16 fuckB = 0;
-
-
-
-
 // Resolver measurement variables
 int i = 0,j = 0,lowest0 = 0,lowest1 = 0, highest0 = 0, highest1 = 0;
 float32 Angle00 = 0.0, Angle01 = 0.0, Angle10 = 0.0, Angle11 = 0.0;
@@ -72,7 +56,7 @@ Uint16 temp0 = 0, temp1 = 0, temp2 = 0, temp3 = 0, temp4 = 0;
 
 float32 control_loop(float32 angle_in){
     angle_error = angle_in-Theta;
-    integral1 += Ts*angle_error*Ki;     //Nem ennek kéne lennie a speednek?
+    integral1 += Ts*angle_error*Ki;
     if (integral1 > 320) {
         integral1 = 320;
     }
@@ -164,24 +148,6 @@ __interrupt void adc1_isr(void)
     update_compare(Outputs);
 
 
-/*if (anyad == 20){
-    lol++;
-    fuckA = sinelookup[lol];
-            if(fuckA > 15000 - deadtime)
-                fuckA = 15000 - deadtime;
-            if(fuckA < deadtime)
-                fuckA = deadtime;       // lehet hogy deadtime/2 kéne?
-
-            EPwm4Regs.CMPA.half.CMPA = fuckA+deadtime;
-            EPwm4Regs.CMPB           = fuckA-deadtime;
-
-
-            if (lol==99)
-                lol=0;
-            anyad = 0;
-}
-anyad++;*/
-
     // Clear ADCINT1 flag reinitialize for next SOC
     AdcRegs.ADCINTFLGCLR.bit.ADCINT1 = 1;
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;   // Acknowledge interrupt to PIE
@@ -189,14 +155,13 @@ anyad++;*/
     return;
 }
 
-//TODO: create the other interrupts, consider if we should do a lot of these stepts here or only set a global and then the control algortihm will do the calculations
 __interrupt void adc2_isr(void)
 {
 
     temp0 = AdcResult.ADCRESULT2;
     temp1 = AdcResult.ADCRESULT3;
 
-    // Change the digital values back to voltage values, and subtract the common mode offset
+    // Change the digital values back to voltage values, and subtract the common mode offset and make an overflow protection
     value0 = (float32)temp0*3.3/4096;
     if(((value0 > 3.3) || (value0 < 0)) && (ConversionCount > 0))
         value0 = Voltage0[ConversionCount-1]+1.65;
@@ -225,12 +190,9 @@ __interrupt void adc2_isr(void)
         }
 
         // First method, calculate four angle values, then average them
-        Angle00 = atan(Voltage0[lowest0]/Voltage1[lowest1]);  //amuyg ugyan az csak voltage1 a tomb
+        Angle00 = atan(Voltage0[lowest0]/Voltage1[lowest1]);
         Angle01 = atan(Voltage0[highest0]/Voltage1[highest1]);
-        Angle10 = atan(Voltage0[lowest1]/Voltage1[lowest1]);
-        Angle11 = atan(Voltage0[highest1]/Voltage1[highest1]);
 
-        //Theta_in = (Angle00 + Angle01 + Angle10 + Angle11) / 4;
         Theta_in = (Angle00 + Angle01) / 2;
 
         Theta_out = control_loop(Theta_in);

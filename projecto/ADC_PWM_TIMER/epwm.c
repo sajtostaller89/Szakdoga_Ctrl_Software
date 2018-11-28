@@ -3,7 +3,7 @@
  *
  *  Created on: 2018. szept. 18.
  *      Author: Ákos
- *      For some reason i can not make epwm1 and 3 to work :(
+ *
  */
 
 #include "DSP28x_Project.h"     // Device Headerfile and Examples Include File
@@ -16,7 +16,7 @@
 
 Uint16 duty4, duty5, duty6;
 float dclink_voltage = 60.0;
-Uint16 deadtime = 70; // 40ns mert ez csak a fele
+Uint16 deadtime = 70; // 40ns, this is only the half
 
 
 __interrupt void epwm4_isr(void)
@@ -94,16 +94,11 @@ void EPwm4_Config()
     EPwm4Regs.CMPB = EPWM4_TIMER_TBPRD/2-deadtime;          // Set Compare B value used to be 1
 
     // Set actions
-    EPwm4Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
+    EPwm4Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero
     EPwm4Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, up count
 
     EPwm4Regs.AQCTLB.bit.CBD = AQ_SET;      // Set PWM1B on Zero
     EPwm4Regs.AQCTLB.bit.CBU = AQ_CLEAR;    // Clear PWM1B on event B, up count
-
-    // Interrupt where we will change the Compare Values or we should change the values inside the adc interrupt right
-    //EPwm4Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
-    //EPwm4Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
-    //EPwm4Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event
 
     // ePWM4 triggers current measurement with 6kHz
     EPwm4Regs.ETSEL.bit.SOCAEN  = 1;            // Enable SOC on A group
@@ -143,16 +138,12 @@ void EPwm5_Config()
     EPwm5Regs.CMPB = EPWM5_TIMER_TBPRD/2-deadtime;          // Set Compare B value, should be >=1 200 is good ie
 
     // Set actions
-    EPwm5Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
+    EPwm5Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero
     EPwm5Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, down count
 
     EPwm5Regs.AQCTLB.bit.CBD = AQ_SET;      // Inverter working principle
     EPwm5Regs.AQCTLB.bit.CBU = AQ_CLEAR;
 
-    /*// Interrupt where we will change the Compare Values
-    EPwm5Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
-    EPwm5Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
-    EPwm5Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event*/
 
     EALLOW;
     SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      //Then enable the sync
@@ -187,16 +178,11 @@ void EPwm6_Config()
     EPwm6Regs.CMPB = EPWM6_TIMER_TBPRD/2-deadtime;          // Set Compare B value used to be 1
 
     // Set actions
-    EPwm6Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero legyen igy, hogy ne csusszunk el, annyi hogy invertalni kell majd a comparalasi szintet, mert ha kicsi ideig akarunk 3.3voltot adni, akkor magas szint kell
+    EPwm6Regs.AQCTLA.bit.CAU = AQ_SET;      // Set PWM1A on Zero
     EPwm6Regs.AQCTLA.bit.CAD = AQ_CLEAR;    // Clear PWM1A on event A, up count
 
     EPwm6Regs.AQCTLB.bit.CBD = AQ_SET;      // Set PWM1B on Zero
     EPwm6Regs.AQCTLB.bit.CBU = AQ_CLEAR;    // Clear PWM1B on event B, up count
-
-    /*// Interrupt where we will change the Compare Values
-    EPwm6Regs.ETSEL.bit.INTSEL = ET_CTR_PRDZERO;         // Select INT on Zero event
-    EPwm6Regs.ETSEL.bit.INTEN = 1;                       // Enable INT
-    EPwm6Regs.ETPS.bit.INTPRD = ET_1ST;                  // Generate INT on 1st event*/
 
     EALLOW;
     SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      //Then enable the sync
